@@ -24,33 +24,21 @@ tr:nth-child(even) {
 </style>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/icons.css">
+	<link rel="stylesheet" href="../css/responsee.css">
+	<link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
+	<link rel="stylesheet" href="../css/template-style.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<header class="w3-display-container w3-content w3-wide" style="max-width: 1500px;" id="home">
-	<img class="w3-image" src="/img/cityview.jpg" alt="Architecture" width="1500">
-	<div class="w3-display-middle w3-margin-top w3-center">
-		<h1 class="w3-xxlarge w3-text-white">
-			<span class="w3-padding w3-white w3-opacity-min"><b>Happy</b></span>
-			<span class="w3-hide-small w3-text-light-grey">House</span>
-		</h1>
-	</div>
-</header>
+
 <body>
-	<div class="w3-top">
-		<div class="w3-bar w3-white w3-wide w3-padding w3-card">
-			<a href="/index.jsp" class="w3-bar-item w3-button"
-				style="text-decoration: none;"><b>Happy</b> House</a>
-			<!-- Float links to the right. Hide them on small screens -->
-			<div class="w3-right w3-hide-small">
-				<strong style="color: #6495ED;">${userinfo.name}</strong>님 환영합니다. 
-				<a href="${root}/main.do?act=logout" class="w3-button w3-amber w3-padding">로그아웃</a>
-			</div>
-		</div>
-	</div>
+	<%@ include file="../header.jsp"%>
 	<div class="container">
 		<section>
 		<div>
@@ -81,7 +69,7 @@ $(document).ready(function(){
 });//ready
 $(document).ready(function(){
 	$("#dong").change(function() {
-		$.get("${pageContext.request.contextPath}/common/search"
+		$.get("${pageContext.request.contextPath}/fsel/search"
 				,{dong:$("#dong").val()}
 				,function(data, status){
 					$("#searchResult").empty();
@@ -126,7 +114,7 @@ function geocode(jsonData) {
 	$.each(jsonData, function(index, vo) {
 		let tmpLat;
 		let tmpLng;
-		https://maps.googleapis.com/maps/api/js?key="  type="text/javascript"></script>
+		https://maps.googleapis.com/maps/api/js?key="  type="text/javascript">
 		$.get("https://maps.googleapis.com/maps/api/geocode/json"
 				,{	key:'AIzaSyAGZLKaqO2wNo1-9kK4lceD2tGARAlNVoA'
 					, address:vo.doro+"+"+vo.ShopName+"+"+vo.jibun

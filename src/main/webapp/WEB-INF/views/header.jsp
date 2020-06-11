@@ -21,7 +21,7 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    <a href="javascript: location.reload();" class="w3-bar-item w3-button"><b>Happy</b> House</a>
+    <a href="/house/lists" class="w3-bar-item w3-button"><b>Happy</b> House</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <c:if test="${userinfo == null}">
@@ -47,9 +47,37 @@
   </div>
 </header>
 
-<div class="container" style=height:30% id="menus">
-  <div><a href="${root}/moveFavRegist" class="w3-bar-item w3-button" style="text-decoration: none;">관심지역 등록</a></div>
-  <div><a href="${root}/house/lists" class="w3-bar-item w3-button" style="text-decoration: none;">아파트 거래 목록</a></div>
-  <div><a href="${root}/map" class="w3-bar-item w3-button" style="text-decoration: none;">지도로 검색</a></div>
-  <div><a href="/index.html" class="w3-bar-item w3-button" style="text-decoration: none;">QnA</a></div>
-</div>
+<section class="section-small-padding background-white text-center container" >
+	<div class="line">
+		<div class="margin">
+			<div class="s-12 m-12 l-3 margin-m-bottom">
+				<div class="padding block-bordered">
+					<i class="icon-sli-home icon3x text-dark center"></i>
+					<h2 class="text-thin">아파트 목록</h2>
+					<a class="button button-dark-stroke text-size-12" href="${root}/house/lists">MOVE</a>
+				</div>
+			</div>
+			<div class="s-12 m-12 l-3 margin-m-bottom">
+				<div class="padding block-bordered">
+					<i class="icon-sli-heart icon3x text-dark center"></i>
+					<h2 class="text-thin">관심지역 등록</h2>
+					<a class="button button-dark-stroke text-size-12" href="${root}/moveFavRegist">MOVE</a>
+				</div>
+			</div>
+			<div class="s-12 m-12 l-3 margin-m-bottom">
+				<div class="padding block-bordered">
+					<i class="icon-sli-map icon3x text-dark center"></i>
+					<h2 class="text-thin">지도로 검색</h2>
+					<a class="button button-dark-stroke text-size-12" href="${root}/map">MOVE</a>
+				</div>
+			</div>
+			<div class="s-12 m-12 l-3 margin-m-bottom">
+				<div class="padding block-bordered">
+					<i class="icon-sli-question icon3x text-dark center"></i>
+					<h2 class="text-thin">QnA</h2>
+					<a class="button button-dark-stroke text-size-12" href="/qna.html">MOVE</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

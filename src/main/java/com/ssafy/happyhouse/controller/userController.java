@@ -59,5 +59,6 @@ public class userController {
 	public int deleteUser(@PathVariable String id) {
 		return userInfoService.delete(id);
 	}
+	
 }
 

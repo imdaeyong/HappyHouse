@@ -12,9 +12,18 @@
 <title>Happy House</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/icons.css">
+<link rel="stylesheet" href="../css/responsee.css">
+<link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
+<link rel="stylesheet" href="../css/template-style.css">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 
 <style>
   .w3-border-right {
@@ -182,11 +191,13 @@ function makeDetailHtml(detail){
 <!-- Page content -->
 <div class="w3-content w3-padding" style="max-width:1564px">
 
+	<div class="background-primary padding text-center">
+        <p class="h1">아파트 거래 내역 목록</p>                                                                        
+	</div>
   <!-- HouseDeal Section -->
   <div class="w3-container w3-padding-32 w3-row">
-  
-  	<div class="w3-col" style="width:350px"><p>아파트 거래 정보</p>
-  		<img class="w3-image" id="houseimg" name="houseimage" src="/img/그림1.jpg" width="300">
+  	<div class="w3-col" style="width:350px; margin-right:10px;">
+  		<img class="w3-image" id="houseimg" name="houseimage" src="/img/그림1.jpg" style="width: 300px; height: 190px">
   		<table class="w3-table" style="margin-top: 20px; border-collapse: separate; border-spacing: 5px;">
 			<tr>
 			  <th class="w3-border-right">주택명</th>
@@ -218,10 +229,7 @@ function makeDetailHtml(detail){
 			</tr>
 		</table>
   	</div>
-  	
-  	<div class="w3-rest">
-  		<h2>아파트 거래 내역 목록</h2>
-	  	
+  	<div class="w3-rest">	  	
 	  	<div style="margin-bottom: 20px;">
 	  	<form method="post" name="houseForm" id="houseForm" >	  		
 	  		<div style="margin-bottom: 5px;">
@@ -241,8 +249,7 @@ function makeDetailHtml(detail){
 			<input type="button" onclick="javascript:search();" value="검색" style="cursor: pointer;">
 	  	
 	  	</form>
-	  	</div>
-	  	
+	  	</div>	  	
 	  	<div style="width:100%; height:460px; overflow:auto">
 		    <table class="w3-table-all w3-hoverable w3-small" style="border:1px;">
 			    <thead>
@@ -256,7 +263,6 @@ function makeDetailHtml(detail){
 			    </thead>
 
 			    <tbody id="tbodyHouse">
-
 			  	</tbody>
 		  	</table>
 	  	</div>
