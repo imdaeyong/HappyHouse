@@ -14,6 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="../css/components.css"> -->
+<!-- <link rel="stylesheet" href="../css/icons.css"> -->
+<!-- <link rel="stylesheet" href="../css/responsee.css"> -->
+<!-- <link rel="stylesheet" href="../owl-carousel/owl.carousel.css"> -->
+<!-- <link rel="stylesheet" href="../owl-carousel/owl.theme.css">      -->
+<!-- <link rel="stylesheet" href="../css/template-style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <body>
@@ -21,12 +27,12 @@
 <%@ include file="header.jsp" %>
 
 <div class="container">
-				<div class="mt-2 mb-2">
-					<h2>주소로 찾기</h4>
-				</div>
-<section id="index_section">
-			<div class="card col-sm-12 mt-1" style="min-height: 850px;">
-				<div class="card-body">
+	<div class="mt-2 mb-2">
+		<h2>주소로 찾기</h4>
+	</div>
+	<section id="index_section">
+		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
+			<div class="card-body">
 
 <!-- here start -->
 <script>
@@ -97,7 +103,7 @@ function geocode(jsonData) {
 		let tmpLng;
 		$.get("https://maps.googleapis.com/maps/api/geocode/json"
 				,{	key:'AIzaSyAGZLKaqO2wNo1-9kK4lceD2tGARAlNVoA'
-					, address:vo.dong+"+"+vo.AptName+"+"+vo.jibun
+					, address:vo.dong+"+"+vo.aptName+"+"+vo.jibun
 				}
 				, function(data, status) {
 					//alert(data.results[0].geometry.location.lat);
@@ -105,22 +111,16 @@ function geocode(jsonData) {
 					tmpLng = data.results[0].geometry.location.lng;
 					$("#lat_"+index).text(tmpLat);
 					$("#lng_"+index).text(tmpLng);
-					addMarker(tmpLat, tmpLng, vo.AptName);
+					addMarker(tmpLat, tmpLng, vo.aptName);
 				}
 				, "json"
 		);//get
 	});//each
 }
 </script>
-시도 : <select id="sido">
-	<option value="0">선택</option>
-</select>
-구군 : <select id="gugun">
-	<option value="0">선택</option>
-</select>
-읍면동 : <select id="dong">
-	<option value="0">선택</option>
-</select>
+	시도 : <select id="sido"> <option value="0">선택</option></select>
+	구군 : <select id="gugun"> <option value="0">선택</option></select>
+	읍면동 : <select id="dong"><option value="0">선택</option></select>
 <table class="table mt-2">
 	<thead>
 		<tr>
@@ -144,36 +144,54 @@ function geocode(jsonData) {
 <script>
 	var multi = {lat: 37.5665734, lng: 126.978179};
 	var map;
+	var locations=[];
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: multi, zoom: 12
 		});
 		var marker = new google.maps.Marker({position: multi, map: map});
+		
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		var markers = locations.map(
+			function(location, i) {
+        		return new google.maps.Marker(
+       				{
+       					position: { lat: parseFloat(location.lat), lng: parseFloat(location.lng) },	// should be float, not string
+       					label: labels[i % labels.length],
+       					aptName: location.aptName,
+       					dong: location.dong
+       				}
+        		);
+     		 }
+		);
 		var markerCluster = new MarkerClusterer(
-				map,
-				markers,
-				{
-					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-				}
-			);
+			map,
+			markers,
+			{
+				imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+			}
+		);
 	}
 	
-	function addMarker(tmpLat, tmpLng, AptName) {
+	function addMarker(tmpLat, tmpLng, aptName) {
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(parseFloat(tmpLat),parseFloat(tmpLng)),
-			label: AptName,
-			title: AptName
+			label: aptName,
+			title: aptName
 		});
+		console.log(marker);
+		location
 		marker.addListener('click', function() {
 			map.setZoom(17);
 			map.setCenter(marker.getPosition());
-			callHouseDealInfo();
+// 			callHouseDealInfo();
 		});
 		marker.setMap(map);
 	}
-	function callHouseDealInfo() {
-		alert("you can call HouseDealInfo");
-	}
+	
+	
+	
 </script>
 <!-- map end -->
 
