@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.dto.FavInfo;
 import com.ssafy.happyhouse.dto.UserInfo;
 import com.ssafy.happyhouse.mapper.UserMapper;
 
@@ -37,6 +38,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public UserInfo findPwdById(String id) {
 		return mapper.findPwdById(id);
+	}
+
+	@Override
+	public int registFav(FavInfo favInfo) {
+		
+		return mapper.registFav(favInfo);
 	}
 	
 

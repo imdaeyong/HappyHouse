@@ -64,7 +64,7 @@ $(document).ready(function(){
 					$("#dong").empty();
 					$("#dong").append('<option value="0">선택</option>');
 					$.each(data, function(index, vo) {
-						$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
+						$("#dong").append("<option value='"+vo.code+"'>"+vo.dong+"</option>");
 					});//each
 				}//function
 				, "json"
@@ -79,17 +79,16 @@ function registFav() {
 		$.ajax(
 		{
 	        type : 'post',
-	        url : '<%=contextPath%>/notice',
+	        url : '<%=contextPath%>/registFav',
 	        dataType : 'json',
 	        data : 
 			{
-	        	subject: $("#subject").val(),
-	        	content: $("#content").val(),
+	        	 dongName: $("#dong option:selected").text(),
+	        	 dongCode: $("#dong option:selected").val(),
 	        	id: $("#id").val()
-	        	
 			},
 	        success : function(data, status, xhr) { 
-				document.location.href = "${contextPath}/noticepage";
+				document.location.href = "${contextPath}/moveFavList";
 	        }, 
 	        error: function(jqXHR, textStatus, errorThrown) 
 	        { 
@@ -110,8 +109,6 @@ function registFav() {
 		<!-- HouseDeal Section -->
 		<div class="w3-container w3-padding-32 w3-row center">
 			<div class="form-block p-30 light-gray-bg border-clear" style="margin: 0px auto;">
-				<form id="dongform" method="post" action="">
-					<input type="hidden" name="act" id="act" value="registFav">
 					<input type="hidden" name="id" id="id" value="${userinfo.id}">
 					<div class="form-group has-feedback row" align="center">
 						<h2 class="title">관심 지역</h2>
@@ -134,11 +131,10 @@ function registFav() {
 								</select>
 							</div>
 							<div class="form-group md-1">
-								<button class="btn btn-group btn-warning btn-animated" onclick="javascript:registFav();"> 등록 <i class="fa fa-check"></i></button>
+								<button class="btn btn-group btn-warning " onclick="javascript:registFav();"> 등록 <i class="fa fa-check"></i></button>
 							</div>
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>

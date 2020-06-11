@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ssafy.happyhouse.dto.FavInfo;
 import com.ssafy.happyhouse.dto.UserInfo;
 
 @Mapper
@@ -55,6 +56,7 @@ public interface UserMapper {
 
 	public UserInfo findPwdById(String id);
 	public UserInfo detail(String id);
+	public int registFav(FavInfo favInfo);
 
 	/********************* 관심지역 ***************/
 	/*	

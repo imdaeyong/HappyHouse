@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.ssafy.happyhouse.dto.FavInfo;
 import com.ssafy.happyhouse.dto.NoticeDto;
 import com.ssafy.happyhouse.dto.UserInfo;
 import com.ssafy.happyhouse.service.UserInfoService;
@@ -59,6 +62,12 @@ public class userController {
 	public int deleteUser(@PathVariable String id) {
 		return userInfoService.delete(id);
 	}
+	
+	@PostMapping(value="/registFav")
+	public int registFav(FavInfo favInfo) {
+		return userInfoService.registFav(favInfo);
+	}
+	
 	
 }
 

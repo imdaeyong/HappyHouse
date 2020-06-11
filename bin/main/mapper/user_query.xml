@@ -34,6 +34,15 @@
 	<select id="findPwdById" resultType="com.ssafy.happyhouse.dto.UserInfo">
 		select * from ssafy_member where id= #{id}
 	</select>
+	<insert id="registFav">	
+		insert into favinfo(id, dong_name, dong_code) 
+			select #{id},#{dongName},#{dongCode} from dual
+			    where not exists 
+				(select id, dong_name, dong_code
+			        from favinfo 
+			        where id=#{id} and dong_name=#{dongName} and dong_code=#{dongCode})
+        
+	</insert>
 </mapper>
 
 
