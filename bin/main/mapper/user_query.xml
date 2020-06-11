@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.happyhouse.mapper.UserMapper">
+	
+	
+	<select id="login" resultType="com.ssafy.happyhouse.dto.UserInfo">
+		select * from ssafy_member where id= #{id} and pw = #{pw}
+	</select>
+	<select id="detail" resultType="com.ssafy.happyhouse.dto.UserInfo">
+		select * from ssafy_member where id= #{id}
+	</select>
+	<insert id="signUp">
+		insert into ssafy_member
+		(id, pw, name, nickname, email, homepage, address, hobby, isAdmin) 
+		VALUES(
+		#{id},#{pw},#{name},#{nickname},#{email},#{homepage},#{address},#{hobby},#{isAdmin}
+		)
+	</insert>
+	<delete id="delete">
+		delete from ssafy_member where id = #{id}
+	</delete>
+	<update id="modify">
+		update ssafy_member 
+		   set 	 id 	= #{id}
+				,pw	= #{pw}			
+				,nickname	= #{nickname}			
+				,email	= #{email}			
+				,homepage	= #{homepage}			
+				,address	= #{address}			
+				,hobby	= #{hobby}			
+				,isAdmin	= #{isAdmin}			
+		 where name= #{name}
+	</update>
+	<select id="findPwdById" resultType="com.ssafy.happyhouse.dto.UserInfo">
+		select * from ssafy_member where id= #{id}
+	</select>
+</mapper>
+
+
+
+
+
+

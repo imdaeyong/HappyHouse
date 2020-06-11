@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.happyhouse.mapper.HouseMapper">
+	
+	
+	<select id ="searchAll" resultType="HouseDeal">
+		select * from housedeal where 1=1 
+		
+		and type in (1)
+			<if test='bean.dong !="" and bean.dong !=null' >
+				and dong like concat('%',#{bean.dong},'%')
+			</if>
+			
+			<if test='bean.aptname !="" and bean.aptname !=null' >
+				and aptname like concat('%',#{bean.aptname},'%')
+			</if>
+		order by no
+		
+		limit #{limit},#{sizePerPage}
+		
+	</select>
+	<select id="search" resultType="HouseDeal">
+		select i.img, d.no, d.dong, d.aptname, d.code, d.dealAmount, 
+		d.buildYear, d.dealYear, d.dealMonth, d.dealDay, d.area,
+		 d.floor, d.jibun, d.type, d.rentMoney from houseinfo i 
+		 right outer join housedeal d on i.aptname = d.aptname and i.no=d.no  
+		 where d.no = #{no} 
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+	select count(*) from housedeal where 1=1 
+		and type in (1)
+			<if test='bean.dong !="" and bean.dong !=null' >
+				and dong like concat('%',#{bean.dong},'%')
+			</if>
+			
+			<if test='bean.aptname !="" and bean.aptname !=null' >
+				and aptname like concat('%',#{bean.aptname},'%')
+			</if>
+	</select>
+</mapper>
+
+
+
+
+
+

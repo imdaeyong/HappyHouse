@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.happyhouse.mapper.CommMapper">
+	
+	<select id ="searchDong" resultType="CommInfo">
+		select * from comminfo where 1=1
+		<if test='dong !="" and dong !=null'>
+			and dong like concat('%',#{dong},'%')
+		</if>		
+	</select>
+	
+	<select id="searchClass" resultType="CommInfo">
+		select * from comminfo where 1=1
+		<if test='code1 !="" and code1!=null'>
+			and code1 = #{code1} 
+		</if>
+		<if test='code2 !="" and code2!=null'>
+			and code2 = #{code2} 
+		</if>
+		<if test='code3 !="" and code3!=null'>
+			and code3 = #{code3} 
+		</if>
+	</select>
+	
+	<select id ="searchEnv" resultType="EnvInfo">
+		select * from envinfo where dong like concat('%',#{dong},'%') 
+	</select>
+</mapper>
+
+
+
+
+
+

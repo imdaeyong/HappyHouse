@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.happyhouse.mapper.NoticeMapper">
+	
+	<insert id="registNotice">
+		insert into notice
+		(id, subject, content, regtime) 
+		VALUES(
+		#{id},#{subject},#{content},now()
+		
+		)
+	</insert>
+	<update id="modifyNotice">
+		update notice 
+		   set 	 subject 	= #{subject}
+				,content	= #{content}			
+		 where noticeno= #{noticeno}
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from notice where noticeno = #{noticeno}
+	</delete>
+	
+	<select id="getNotice" resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select * from notice where noticeno= #{noticeno}
+	</select>
+	
+	<select id ="listNotice" resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select * from notice;
+	</select>
+	
+	<select id="searchNotice" resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		<if test="key eq 'noticeno'.toString()" >
+			select * from notice where noticeno = #{word};
+		</if>
+		<if test="key eq 'subject'.toString()" >
+			select * from notice where subject like CONCAT('%', #{word}, '%');
+		</if>
+		<if test="key eq 'content'.toString()" >
+			select * from notice where content like CONCAT('%', #{word}, '%');
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<package name="com.ssafy.happyhouse.dto" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/comm_query.xml" />
+		<mapper resource="mapper/house_query.xml" />
+<!-- 		<mapper resource="mapper/env_query.xml" /> -->
+ 		<mapper resource="mapper/notice_query.xml" />
+ 		<mapper resource="mapper/fav_query.xml" />
+ 		<mapper resource="mapper/user_query.xml" />
+		<mapper resource="mapper/fselectbox_query.xml" />
+		<mapper resource="mapper/qna_query.xml" />
+	</mappers>
+</configuration>
