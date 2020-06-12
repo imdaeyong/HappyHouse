@@ -12,15 +12,15 @@
 	SELECT left(gugun_code,5) gugun_code, gugun_name FROM ssafydb.guguncode
 	 where left(gugun_code,2) = #{sido} ORDER BY gugun_code
 	</select>
-	
+		
 	<select id ="selectDong" resultType="HouseInfo">
 	SELECT distinct dong, code FROM ssafydb.houseinfo 
 	where code = #{gugun}
 	ORDER BY dong
 	</select>
 	
-	<select id ="selectApt" resultType="HouseInfo">
-	SELECT * FROM ssafydb.houseinfo WHERE dong = #{dong} 
+	<select id ="selectApt" resultType="HouseDeal">
+	SELECT d.* , i.lat,i.lng FROM houseinfo i left outer join housedeal d on i.aptname=d.aptname where trim(d.dong) = #{dong} 
 			ORDER BY AptName
 	</select>
 </mapper>

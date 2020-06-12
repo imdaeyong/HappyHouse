@@ -14,14 +14,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="../css/components.css"> -->
-<!-- <link rel="stylesheet" href="../css/icons.css"> -->
-<!-- <link rel="stylesheet" href="../css/responsee.css"> -->
-<!-- <link rel="stylesheet" href="../owl-carousel/owl.carousel.css"> -->
-<!-- <link rel="stylesheet" href="../owl-carousel/owl.theme.css">      -->
-<!-- <link rel="stylesheet" href="../css/template-style.css"> -->
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/icons.css">
+<link rel="stylesheet" href="../css/responsee.css">
+<link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
+<link rel="stylesheet" href="../css/template-style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cbe81440a2dc401533a67159970a3ac&libraries=services,clusterer,drawing"></script>
 <body>
 
 <%@ include file="header.jsp" %>
@@ -36,7 +36,63 @@
 
 <!-- here start -->
 <script>
+
+$(document).ready(function() {
+    initMap();
+ });
+function initMap(){
+
+	//마커 이미지!
+	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	var imageSize = new kakao.maps.Size(24, 35);
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+		
+	var map;
+	var multi = new kakao.maps.LatLng(37.5665734, 126.978179);
+	map = new kakao.maps.Map(document.getElementById('map'), {
+		center : multi, // 지도의 중심좌표
+		level : 9	// 지도의 확대 레벨
+	});
+	
+	var marker = new kakao.maps.Marker({
+		position : multi,
+		map : map,
+		image:markerImage
+	});
+	
+	 // 마커 클러스터러를 생성합니다 
+    var clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 5 // 클러스터 할 최소 지도 레벨 
+    });
+	 
+	
+	 $.get("${pageContext.request.contextPath}/fsel/apt"
+			,{dong:$("#dong").val()}
+			,function(datas, status){
+			console.log(datas);
+			
+	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+	        var markers = $(datas).map(function(i, data) {
+	            return new kakao.maps.Marker({
+	                position : new kakao.maps.LatLng(data.lat, data.lng),
+	     			label:data.aptName,
+	     			title:data.aptName,
+	     			image:markerImage
+	            });
+	        });
+
+	        // 클러스터러에 마커들을 추가합니다
+	        clusterer.addMarkers(markers);
+	    });
+}
+	
 let colorArr = ['table-primary','table-success','table-danger'];
+var markers= [];
+var locations= [];
+
 $(document).ready(function(){
 	$.get("${pageContext.request.contextPath}/fsel/sido"
 		,function(data, status){
@@ -77,46 +133,56 @@ $(document).ready(function(){
 	$("#dong").change(function() {
 		$.get("${pageContext.request.contextPath}/fsel/apt"
 				,{dong:$("#dong").val()}
-				,function(data, status){
-					$("#searchResult").empty();
+				,function(data, status)
+				{
+					$("tbody").empty(); //테이블 초기화
+// 					removeMarker(); //지도 초기화
+						
 					$.each(data, function(index, vo) {
 						let str = "<tr class="+colorArr[index%3]+">"
 						+ "<td>" + vo.no + "</td>"
 						+ "<td>" + vo.dong + "</td>"
 						+ "<td>" + vo.aptName + "</td>"
-						+ "<td>" + vo.jibun + "</td>"
-						+ "<td id='lat_"+index+"'></td>"
-						+ "<td id='lng_"+index+"'></td></tr>";
+						+ "<td>" + vo.floor + "</td>"
+						+ "<td>" + vo.dealAmount + "</td>"
+						+ "<td>" + vo.lng + "</td></tr>"
 						$("tbody").append(str);
-						$("#searchResult").append(vo.dong+" "+vo.aptName+" "+vo.jibun+"<br>");
+						
 					});//each
-					geocode(data);
-				}//function
-				, "json"
+// 				houselists(data);	
+				initMap();				
+				}//function					
+			, "json"						
 		);//get
 	});//change
 });//ready
-function geocode(jsonData) {
-	let idx = 0;
-	$.each(jsonData, function(index, vo) {
-		let tmpLat;
-		let tmpLng;
-		$.get("https://maps.googleapis.com/maps/api/geocode/json"
-				,{	key:'AIzaSyAGZLKaqO2wNo1-9kK4lceD2tGARAlNVoA'
-					, address:vo.dong+"+"+vo.aptName+"+"+vo.jibun
-				}
-				, function(data, status) {
-					//alert(data.results[0].geometry.location.lat);
-					tmpLat = data.results[0].geometry.location.lat;
-					tmpLng = data.results[0].geometry.location.lng;
-					$("#lat_"+index).text(tmpLat);
-					$("#lng_"+index).text(tmpLng);
-					addMarker(tmpLat, tmpLng, vo.aptName);
-				}
-				, "json"
-		);//get
-	});//each
+// function houselists(data){	
+// 	console.log(data);
+// 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+	
+// 	for(var i=0; i<data.length;i++){		
+// 		console.log("현재 데이터");
+// 		console.log(data[i]);
+// 		var imageSize = new kakao.maps.Size(24, 35);
+// 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+// 		console.log(data[i].lat);
+		
+// 		var marker= new kakao.maps.Marker({
+// 			position:new kakao.maps.LatLng(parseFloat(data[i].lat),parseFloat(data[i].lng)),
+// 			label:data[i].aptName,
+// 			title:data[i].aptName,
+// 			image:markerImage
+// 		});
+// 		marker.setMap(map);
+// 		console.log(marker);
+// 	}
+// }
+function removeMarker(){
+	
+	
 }
+
 </script>
 	시도 : <select id="sido"> <option value="0">선택</option></select>
 	구군 : <select id="gugun"> <option value="0">선택</option></select>
@@ -127,9 +193,9 @@ function geocode(jsonData) {
 			<th>번호</th>
 			<th>법정동</th>
 			<th>아파트이름</th>
-			<th>지번</th>
-			<th>위도</th>
-			<th>경도</th>
+			<th>층</th>
+			<th>거래가격</th>
+			<th>링크</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -139,60 +205,6 @@ function geocode(jsonData) {
 <!-- here end -->
 <!-- map start -->
 <div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGZLKaqO2wNo1-9kK4lceD2tGARAlNVoA&callback=initMap"  type="text/javascript"></script>
-<script>
-	var multi = {lat: 37.5665734, lng: 126.978179};
-	var map;
-	var locations=[];
-	function initMap() {
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: multi, zoom: 12
-		});
-		var marker = new google.maps.Marker({position: multi, map: map});
-		
-		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		
-		var markers = locations.map(
-			function(location, i) {
-        		return new google.maps.Marker(
-       				{
-       					position: { lat: parseFloat(location.lat), lng: parseFloat(location.lng) },	// should be float, not string
-       					label: labels[i % labels.length],
-       					aptName: location.aptName,
-       					dong: location.dong
-       				}
-        		);
-     		 }
-		);
-		var markerCluster = new MarkerClusterer(
-			map,
-			markers,
-			{
-				imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-			}
-		);
-	}
-	
-	function addMarker(tmpLat, tmpLng, aptName) {
-		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(parseFloat(tmpLat),parseFloat(tmpLng)),
-			label: aptName,
-			title: aptName
-		});
-		console.log(marker);
-		location
-		marker.addListener('click', function() {
-			map.setZoom(17);
-			map.setCenter(marker.getPosition());
-// 			callHouseDealInfo();
-		});
-		marker.setMap(map);
-	}
-	
-	
-	
-</script>
 <!-- map end -->
 
 				</div>
