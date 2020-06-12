@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssafy.happyhouse.dto.CommInfo;
 import com.ssafy.happyhouse.dto.HouseDeal;
 import com.ssafy.happyhouse.dto.HouseInfo;
 import com.ssafy.happyhouse.dto.SidoCodeDTO;
@@ -52,6 +53,11 @@ public class FSelectBoxController extends HttpServlet {
 	@RequestMapping(value="/apt")
 	public List<HouseDeal> aptsearch(@RequestParam Map<String, String> param ,Model m) throws Exception{
 		return fselService.selectApt(param.get("dong"));
+	}
+	
+	@RequestMapping(value="/comm")
+	public List<CommInfo> commsearch(@RequestParam Map<String, String> param ,Model m) throws Exception{
+		return fselService.selectComm(param.get("dong"));
 	}
 	
 

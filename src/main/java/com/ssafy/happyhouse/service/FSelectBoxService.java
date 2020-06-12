@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.service;
 
 import java.util.ArrayList;
 
+import com.ssafy.happyhouse.dto.CommInfo;
 import com.ssafy.happyhouse.dto.HouseDeal;
 import com.ssafy.happyhouse.dto.HouseInfo;
 import com.ssafy.happyhouse.dto.SidoCodeDTO;
@@ -15,5 +16,7 @@ public interface FSelectBoxService {
 	ArrayList<HouseInfo> selectDong(String gugun) throws Exception;
 
 	ArrayList<HouseDeal> selectApt(String dong) throws Exception;
+	
+	ArrayList<CommInfo> selectComm(String dong) throws Exception;
 
 }

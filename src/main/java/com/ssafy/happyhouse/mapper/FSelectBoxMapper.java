@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ssafy.happyhouse.dto.CommInfo;
 import com.ssafy.happyhouse.dto.HouseDeal;
 import com.ssafy.happyhouse.dto.HouseInfo;
 import com.ssafy.happyhouse.dto.SidoCodeDTO;
@@ -19,5 +20,7 @@ public interface FSelectBoxMapper {
 	ArrayList<HouseInfo> selectDong(@Param("gugun") String gugun) throws Exception;
 
 	ArrayList<HouseDeal> selectApt(@Param("dong") String dong) throws Exception;
+	
+	ArrayList<CommInfo> selectComm(@Param("dong") String dong) throws Exception;
 
 }

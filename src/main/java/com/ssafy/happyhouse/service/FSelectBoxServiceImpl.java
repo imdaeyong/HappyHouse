@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.dto.CommInfo;
 import com.ssafy.happyhouse.dto.HouseDeal;
 import com.ssafy.happyhouse.dto.HouseInfo;
 import com.ssafy.happyhouse.dto.SidoCodeDTO;
@@ -37,6 +38,12 @@ public class FSelectBoxServiceImpl implements FSelectBoxService {
 	@Override
 	public ArrayList<HouseDeal> selectApt(String dong) throws Exception {
 		ArrayList<HouseDeal> list = mapper.selectApt(dong);
+		return list;
+	}
+
+	@Override
+	public ArrayList<CommInfo> selectComm(String dong) throws Exception {
+		ArrayList<CommInfo> list = mapper.selectComm(dong);
 		return list;
 	}
 

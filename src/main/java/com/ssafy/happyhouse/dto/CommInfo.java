@@ -35,29 +35,6 @@ public class CommInfo {
 	private String lat;
 	private String lng;
 	
-	
-	public CommInfo(int no, String shopName, String localName, String code1, String codeName1, String code2,
-			String codeName2, String code3, String codeName3, String code4, String codeName4, int dongcode, String dong,
-			String jibun, String doro, String lat, String lng) {
-		super();
-		this.no = no;
-		ShopName = shopName;
-		LocalName = localName;
-		this.code1 = code1;
-		this.codeName1 = codeName1;
-		this.code2 = code2;
-		this.codeName2 = codeName2;
-		this.code3 = code3;
-		this.codeName3 = codeName3;
-		this.code4 = code4;
-		this.codeName4 = codeName4;
-		this.dongcode = dongcode;
-		this.dong = dong;
-		this.jibun = jibun;
-		this.doro = doro;
-		this.lat = lat;
-		this.lng = lng;
-	}
 	@Override
 	public String toString() {
 		return "CommInfo [no=" + no + ", ShopName=" + ShopName + ", LocalName=" + LocalName + ", code1=" + code1

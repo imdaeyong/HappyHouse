@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public int registFav(FavInfo favInfo) {
 		
 		return mapper.registFav(favInfo);
+	}
+
+	@Override
+	public List<FavInfo> userFavList(String id) {
+		return mapper.userFavList(id);
 	}
 	
 

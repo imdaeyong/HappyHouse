@@ -23,6 +23,10 @@
 	SELECT d.* , i.lat,i.lng FROM houseinfo i left outer join housedeal d on i.aptname=d.aptname where trim(d.dong) = #{dong} 
 			ORDER BY AptName
 	</select>
+	
+	<select id ="selectComm" resultType="CommInfo">
+		SELECT shopname as ShopName, codename3 as codeName3, address as doro, lng, lat from comminfo where dong = #{dong}
+	</select>
 </mapper>
 
 

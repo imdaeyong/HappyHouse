@@ -65,10 +65,13 @@ public class userController {
 	
 	@PostMapping(value="/registFav")
 	public int registFav(FavInfo favInfo) {
-		System.out.println(favInfo);
 		return userInfoService.registFav(favInfo);
 	}
 	
-	
+	@GetMapping(value="/userFavList/{id}")
+	public List<FavInfo> userFavList(@PathVariable String id) {
+		System.out.println(id);
+		return userInfoService.userFavList(id);
+	}
 }
 

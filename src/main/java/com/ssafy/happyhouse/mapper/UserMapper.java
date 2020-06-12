@@ -57,6 +57,7 @@ public interface UserMapper {
 	public UserInfo findPwdById(String id);
 	public UserInfo detail(String id);
 	public int registFav(FavInfo favInfo);
+	public List<FavInfo> userFavList(String id);
 
 	/********************* 관심지역 ***************/
 	/*	

@@ -43,6 +43,9 @@
 			        where id=#{id} and dong_name=#{dongName} and dong_code=#{dongCode})
         
 	</insert>
+	<select id="userFavList" resultType="com.ssafy.happyhouse.dto.FavInfo">
+		select dong_name as dongName, dong_code as dongCode from favinfo where id= #{id}
+	</select>
 </mapper>
 
 
