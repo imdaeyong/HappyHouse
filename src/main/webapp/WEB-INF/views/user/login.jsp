@@ -45,7 +45,7 @@ function findpwd(){
 
 <%@ include file="../header.jsp" %>
 
-<div class="container" align="center" style="margin-top: 90px;margin-bottom: 90px;">
+<div class="container" align="center" style="margin-bottom: 90px;">
 	<c:if test="${userinfo == null}">
 		<h3>${msg}</h3>
 	</c:if>

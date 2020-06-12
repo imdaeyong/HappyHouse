@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
 <link rel="stylesheet" href="../css/template-style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -44,6 +44,8 @@
 		}
 		if (word == "") {
 			alert("모든 목록 조회!!");
+			list();
+			return;
 		}
 		
 		$.ajax({
@@ -101,7 +103,7 @@
 			var subject = list[i].subject;
 			
 			var listHtml =
-				'<tr style="cursor:pointer" data-id=' + noticeno +'><td>' + noticeno + '</td><td>' + subject + '</td><td>' + id + '</td></tr>';
+				'<tr style="cursor:pointer" data-id=' + noticeno +'><th>' + noticeno + '</th><td>' + subject + '</td><td>' + id + '</td></tr>';
 
 			$("#noticeBody").append(listHtml);
 		}
@@ -154,10 +156,6 @@
 		$("#detail_subject").html(subject);
 
 		$('#noticeModal').modal('show');
-	}
-	
-	function noticewrite() {
-		location.href = "${contextPath}/moveNotice";
 	}
 
 	function deleteNotice(){
@@ -251,39 +249,33 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div class="container" align="center"
-		style="margin-top: 90px; margin-bottom: 90px;">
-		<div class="col-lg-8" align="center">
-			<h2>공지사항</h2>
-			<%-- <c:if test="${userinfo.isAdmin == 1}"> --%>
-				<table class="table table-borderless">
-					<tr>
-						<td align="right"><button type="button" class="btn btn-link"
-								onclick="javascript:noticewrite();">글쓰기</button></td>
-					</tr>
-				</table>
-			<%-- </c:if> --%>
+	<div class="container" align="center">
+		<div align="center">
+			<div class="line">
+				<h2 class="text-size-50 text-center">공지사항</h2>
+				<hr class="break-small background-primary break-center">
+			</div>
 			<form id="searchform" method="get" class="form-inline" action="">
 				<input type="hidden" name="act" id="act" value="search">
 				<table class="table table-borderless">
 					<tr>
-						<td align="right"><select class="form-control" name="key"
-							id="key">
+						<td align="right"><select class="form-control" name="key" id="key">
 								<option value="noticeno" selected="selected">글번호</option>
 								<option value="subject">제목</option>
 								<option value="content">내용</option>
-						</select> <input type="text" class="form-control" placeholder="검색어 입력." name="word" id="word">
-							<button type="button" class="btn btn-primary"
-								onclick="javascript:searchNotice();">검색</button></td>
+						</select> <input type="text" class="form-control" placeholder="검색어 입력" name="word" id="word">
+							<button type="button" class="btn btn-primary" onclick="javascript:searchNotice();">검색</button>
+							<a class="button btn text-size-12" href="${root}/moveNotice">글쓰기</a>
+						</td>
 					</tr>
 				</table>
 			</form>
-			<table class="w3-table w3-bordered w3-hoverable">
-				<thead>
+			<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+				<thead class="thead-dark">
 					<tr>
-						<th width="80px">번 호</th>
-						<th width='50%'>제 목</th>
-						<th>작 성 자</th>
+						<th width="10%">번 호</th>
+						<th width='60%'>제 목</th>
+						<th width="30%">작 성 자</th>
 					</tr>
 				</thead>
 				<tbody id="noticeBody">
@@ -333,7 +325,7 @@
 			<!-- Modal footer -->
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" onclick="javascript:showModifyModal();">수정</button>
-				<button type="button" class="btn btn-warning" onclick="javascript:deleteNotice()" >삭제</button>
+				<button type="button" class="btn btn-danger" onclick="javascript:deleteNotice()" >삭제</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 

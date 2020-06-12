@@ -15,6 +15,12 @@
   <title>공지사항 작성</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/icons.css">
+<link rel="stylesheet" href="../css/responsee.css">
+<link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
+<link rel="stylesheet" href="../css/template-style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
@@ -94,10 +100,12 @@
 
 <%@ include file="../header.jsp" %>
 	
-<div class="container" align="center" style="margin-top: 90px;margin-bottom: 90px;">
+<div class="container" align="center" style="margin-bottom: 90px;">
 	<div class="col-lg-6" align="center">
-		<h2>공지사항 쓰기</h2>
-		<form id="writeform" method="post" action="">
+		<div class="line">
+			<h2 class="text-size-50 text-center">공지사항 작성</h2>
+		</div>
+		<form id="writeform" method="post" action="" class="customform">
 			<input type="hidden" name="id" id="id" value="${userinfo.id}">
 			<div class="form-group" align="left">
 				<label for="subject">제목:</label>
