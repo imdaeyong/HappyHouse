@@ -47,11 +47,11 @@ function initMap(){
 	var imageSize = new kakao.maps.Size(24, 35);
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 		
-	var map;
-	var multi = new kakao.maps.LatLng(37.5665734, 126.978179);
+	var map; //맵 생성, 센터 잡아주기
+	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
 	map = new kakao.maps.Map(document.getElementById('map'), {
 		center : multi, // 지도의 중심좌표
-		level : 9	// 지도의 확대 레벨
+		level : 10	// 지도의 확대 레벨
 	});
 	
 	var marker = new kakao.maps.Marker({
@@ -60,32 +60,110 @@ function initMap(){
 		image:markerImage
 	});
 	
+	var iwContent = '<div class="card" style="width:200px">' +
+	'<img id="imgView" src = "/img/'.mc+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
+	'<div class="card-body">' +
+	'<h4 class="card-title">'+marker.mc+'</h4>' +
+	'<p class="card-text">'+marker.mc+'</p>' +
+	'<a href="https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query='+marker.mc+'" class="btn btn-primary">검색</a>' +
+	'<a href="http://naver.com" class="btn btn-primary">가시는길</a>' +
+	'</div>' +
+	'</div>';
+	 
+	
+	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
+	    content : iwContent,
+	    removable : true,
+	   
+	}); 
+	
+	kakao.maps.event.addListener(marker, 'click', function() {
+	      // 마커 위에 인포윈도우를 표시합니다
+	      infowindow.open(map, marker);  
+	});
+	
 	 // 마커 클러스터러를 생성합니다 
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-        minLevel: 5 // 클러스터 할 최소 지도 레벨 
+        minLevel: 1, // 지도레벨이 어느정도 이상일때 클러스터 보일지
+        disableClickZoom: true
+    });
+	 
+    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+        if(level<=2){
+        	disableCLickZoom: false
+        }else{
+        	// 현재 지도 레벨에서 1레벨 확대한 레벨
+            var level = map.getLevel()-2;
+            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+            map.setLevel(level, {anchor: cluster.getCenter()});	
+        }
+    	
     });
 	 
 	
 	 $.get("${pageContext.request.contextPath}/fsel/apt"
 			,{dong:$("#dong").val()}
 			,function(datas, status){
+			console.log("아파트리스트확인");
 			console.log(datas);
 			
+			$("tbody").empty(); //테이블 초기화
+	           
+	        $.each(datas, function(index, vo) {
+	           let str = "<tr class="+colorArr[index%3]+">"
+	           + "<td>" + vo.no + "</td>"
+	           + "<td>" + vo.dong + "</td>"
+	           + "<td>" + vo.aptName + "</td>"
+	           + "<td>" + vo.floor + "</td>"
+	           + "<td>" + vo.dealAmount + "</td>"
+	           + "<td>" + vo.lng + "</td></tr>"
+	           $("tbody").append(str);
+	           
+	        });
+
 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 	        var markers = $(datas).map(function(i, data) {
-	            return new kakao.maps.Marker({
+	        	
+	        	var marker = new kakao.maps.Marker({
 	                position : new kakao.maps.LatLng(data.lat, data.lng),
-	     			label:data.aptName,
-	     			title:data.aptName,
-	     			image:markerImage
+	     			title:data.aptName, //marker.mc에 title담기는거같음
+	     			image:markerImage,
+	     			clickable:true //마커 클릭시 지도 동작x
 	            });
+	        	
+	        	//인포윈도우 만들기
+	        	var iwContent = '<div class="card" style="width:200px">' +
+	    		'<img id="imgView" src = "/img/'+marker.getTitle()+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
+	    		'<div class="card-body">' +
+	    		'<h4 class="card-title">'+marker.getTitle()+'</h4>' +
+	    		'<p class="card-text">'+marker.getTitle()+'</p>' +
+	    		'<a href="https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query='+marker.mc+'" class="btn btn-primary">검색</a>' +
+	    		'<a href="http://naver.com" class="btn btn-primary">가시는길</a>' +
+	    		'</div>' +
+	    		'</div>';
+	    		 
+	        	
+	        	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
+	        	    content : iwContent,
+	        	    removable : true,
+	        	   
+	        	}); 
+	        	kakao.maps.event.addListener(marker, 'click', function() {
+	        	      // 마커 위에 인포윈도우를 표시합니다
+	        	      infowindow.open(map, marker);  
+	        	});
+	        	
+// 	        	console.log(marker);
+// 	        	console.log(marker.mc);
+	        	return marker;	        	
 	        });
 
 	        // 클러스터러에 마커들을 추가합니다
 	        clusterer.addMarkers(markers);
+	        console.log(clusterer);
 	    });
 }
 	
@@ -131,62 +209,17 @@ $(document).ready(function(){
 		);//get
 	});//change
 	$("#dong").change(function() {
-		$.get("${pageContext.request.contextPath}/fsel/apt"
-				,{dong:$("#dong").val()}
-				,function(data, status)
-				{
-					$("tbody").empty(); //테이블 초기화
-// 					removeMarker(); //지도 초기화
-						
-					$.each(data, function(index, vo) {
-						let str = "<tr class="+colorArr[index%3]+">"
-						+ "<td>" + vo.no + "</td>"
-						+ "<td>" + vo.dong + "</td>"
-						+ "<td>" + vo.aptName + "</td>"
-						+ "<td>" + vo.floor + "</td>"
-						+ "<td>" + vo.dealAmount + "</td>"
-						+ "<td>" + vo.lng + "</td></tr>"
-						$("tbody").append(str);
-						
-					});//each
-// 				houselists(data);	
-				initMap();				
-				}//function					
-			, "json"						
-		);//get
+		initMap();				
 	});//change
 });//ready
-// function houselists(data){	
-// 	console.log(data);
-// 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-	
-// 	for(var i=0; i<data.length;i++){		
-// 		console.log("현재 데이터");
-// 		console.log(data[i]);
-// 		var imageSize = new kakao.maps.Size(24, 35);
-// 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-// 		console.log(data[i].lat);
-		
-// 		var marker= new kakao.maps.Marker({
-// 			position:new kakao.maps.LatLng(parseFloat(data[i].lat),parseFloat(data[i].lng)),
-// 			label:data[i].aptName,
-// 			title:data[i].aptName,
-// 			image:markerImage
-// 		});
-// 		marker.setMap(map);
-// 		console.log(marker);
-// 	}
-// }
-function removeMarker(){
-	
-	
-}
 
 </script>
 	시도 : <select id="sido"> <option value="0">선택</option></select>
 	구군 : <select id="gugun"> <option value="0">선택</option></select>
 	읍면동 : <select id="dong"><option value="0">선택</option></select>
+	<!-- map start -->
+<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
+<!-- map end -->
 <table class="table mt-2">
 	<thead>
 		<tr>
@@ -203,9 +236,7 @@ function removeMarker(){
 	</tbody>
 </table>
 <!-- here end -->
-<!-- map start -->
-<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-<!-- map end -->
+
 
 				</div>
 			</div>
