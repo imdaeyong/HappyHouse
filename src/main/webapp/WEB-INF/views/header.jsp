@@ -78,6 +78,7 @@
 					<a class="button button-dark-stroke text-size-12" href="/qna.html">MOVE</a>
 				</div>
 			</div>
+			<a class="button button-dark-stroke text-size-12" href="/testmap.html">맵테스트</a>
 		</div>
 	</div>
 </section>
