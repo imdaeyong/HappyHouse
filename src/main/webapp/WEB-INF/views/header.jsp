@@ -60,9 +60,9 @@
 			</div>
 			<div class="s-12 m-12 l-3 margin-m-bottom">
 				<div class="padding block-bordered">
-					<i class="icon-sli-heart icon3x text-dark center"></i>
-					<h2 class="text-thin">관심지역 등록</h2>
-					<a class="button button-dark-stroke text-size-12" href="${root}/moveFavRegist">MOVE</a>
+					<i class="icon-sli-plus icon3x text-dark center"></i>
+					<h2 class="text-thin">주변 약국찾기</h2>
+					<a class="button button-dark-stroke text-size-12" href="${root}/drugstore">MOVE</a>
 				</div>
 			</div>
 			<div class="s-12 m-12 l-3 margin-m-bottom">

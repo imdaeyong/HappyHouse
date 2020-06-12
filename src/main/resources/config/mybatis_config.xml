@@ -12,5 +12,6 @@
  		<mapper resource="mapper/user_query.xml" />
 		<mapper resource="mapper/fselectbox_query.xml" />
 		<mapper resource="mapper/qna_query.xml" />
+		<mapper resource="mapper/drugstore_query.xml" />
 	</mappers>
 </configuration>

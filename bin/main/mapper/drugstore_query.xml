@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ssafy.happyhouse.mapper.DrugstoreMapper">
+	
+	
+	<select id ="searchDrugStore" resultType="DrugstoreInfo">
+		SELECT id, drugstore_name as drugstoreName, drugstore_address as drugstoreAddress, lng, lat, phone_num as phoneNum from drugstoreinfo limit 10;
+	</select>
+
+</mapper>

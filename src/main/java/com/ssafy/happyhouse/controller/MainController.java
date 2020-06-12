@@ -60,6 +60,10 @@ public class MainController extends HttpServlet {
 	public String qna() {
 		return "qna";
 	}
+	@RequestMapping(value="/drugstore")
+	public String drugstore() {
+		return "drugstore";
+	}
 	
 	
 //	@GetMapping(value="/") 
