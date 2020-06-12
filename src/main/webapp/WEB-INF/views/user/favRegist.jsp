@@ -4,7 +4,6 @@
 <%
 	String contextPath = request.getContextPath();
 %>
-<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +84,7 @@ function registFav() {
 			{
 	        	 dongName: $("#dong option:selected").text(),
 	        	 dongCode: $("#dong option:selected").val(),
-	        	id: $("#id").val()
+	        	 id: $("#login_id").val()
 			},
 	        success : function(data, status, xhr) { 
 				document.location.href = "${contextPath}/moveFavList";
@@ -104,39 +103,36 @@ function registFav() {
 	<%@ include file="../header.jsp" %>
 
 
-	<div class="main-container" align="left" style="max-width: 70%;margin: 0px auto;">
-
-		<!-- HouseDeal Section -->
-		<div class="w3-container w3-padding-32 w3-row center">
-			<div class="form-block p-30 light-gray-bg border-clear" style="margin: 0px auto;">
-					<input type="hidden" name="id" id="id" value="${userinfo.id}">
-					<div class="form-group has-feedback row" align="center">
-						<h2 class="title">관심 지역</h2>
-						<label for="inputPassword" class="col-md-3 control-label text-md-right col-form-label">관심지역 설정 <span class="text-danger small">*</span>
-						</label>
-						<div class="col-md-8">
-							<div class="form-group md">
-								<select class="form-control" name="sido" id="sido">
-									<option value="0">선택</option>
-								</select>
-							</div>
-							<div class="form-group md-1">
-								<select class="form-control" name="gugun" id="gugun">
-									<option value="0">선택</option>
-								</select>
-							</div>
-							<div class="form-group md-1">
-								<select class="form-control" name="dong" id="dong">
-									<option value="0">선택</option>
-								</select>
-							</div>
-							<div class="form-group md-1">
-								<button class="btn btn-group btn-warning " onclick="javascript:registFav();"> 등록 <i class="fa fa-check"></i></button>
-							</div>
-						</div>
-					</div>
-			</div>
+	<div class="container" align="center" style="margin-bottom: 90px;">
+		<div class="line">
+			<h2 class="text-size-50 text-center">관심 지역 등록</h2>
+			<hr class="break-small background-primary break-center">
 		</div>
+		<!-- HouseDeal Section -->
+		<div class="col-lg-6" align="center">
+		<form class="customform">
+				<div class="form-group" align="left">
+					<label for="">시/도 선택</label>
+					<select class="form-control" name="sido" id="sido">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group" align="left">
+					<label for="">시/도 선택</label>
+					<select class="form-control" name="gugun" id="gugun">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group" align="left">
+					<label for="">시/도 선택</label>
+					<select class="form-control" name="dong" id="dong">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group" align="center">
+					<button type="button" class="btn btn-warning" onclick="javascript:registFav();">등록</button>
+				</div>
+		</form>
 	</div>
 </body>
 

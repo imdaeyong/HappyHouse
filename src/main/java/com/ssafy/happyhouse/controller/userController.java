@@ -65,6 +65,7 @@ public class userController {
 	
 	@PostMapping(value="/registFav")
 	public int registFav(FavInfo favInfo) {
+		System.out.println(favInfo);
 		return userInfoService.registFav(favInfo);
 	}
 	

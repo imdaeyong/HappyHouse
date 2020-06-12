@@ -74,9 +74,13 @@ $(document).ready(function() {
 
 <%@ include file="../header.jsp" %>
 
-<div class="container" align="center" style="margin-top: 90px;margin-bottom: 90px;">
+<div class="container" align="center" style="margin-bottom: 90px;">
+	<div class="line">
+		<h2 class="text-size-50 text-center">회원가입</h2>
+		<hr class="break-small background-primary break-center">
+	</div>
 	<div class="col-lg-6" align="center">
-		<form id="memberform" method="post" action="">
+		<form id="memberform" class="customform" method="post" action="">
 		<input type="hidden" name="act" id="act" value="join">
 			<div class="form-group" align="left">
 				<label for="name">이름</label>

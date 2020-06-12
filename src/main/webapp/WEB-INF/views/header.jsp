@@ -19,6 +19,7 @@
 	}
 </style>
 <!-- Navbar (sit on top) -->
+<input type="hidden" id="login_id" value="${userinfo.name}"/>
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
     <a href="/house/lists" class="w3-bar-item w3-button"><b>Happy</b> House</a>
@@ -79,6 +80,12 @@
 				</div>
 			</div>
 			<a class="button button-dark-stroke text-size-12" href="/testmap.html">맵테스트</a>
+
+			<c:if test="${userinfo.name == null}">
+				<c:if test="${pageContext.request.requestURI != '/WEB-INF/views/user/login.jsp' and pageContext.request.requestURI != '/WEB-INF/views/user/join.jsp' and pageContext.request.requestURI != '/WEB-INF/views/user/findpwd.jsp'}">
+					<c:redirect url="${root}/"/>
+				</c:if>
+			</c:if>
 		</div>
 	</div>
 </section>

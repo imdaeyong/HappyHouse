@@ -150,10 +150,10 @@
 
 		
 		$("#detail_regtime").html(regtime);
-		$("#detail_content").html(content);
+		$("#detail_content").val(content);
 		$("#detail_id").html(id);
 		$("#detail_noticeno").html(noticeno);
-		$("#detail_subject").html(subject);
+		$("#detail_subject").val(subject);
 
 		$('#noticeModal').modal('show');
 	}
@@ -286,87 +286,72 @@
 	<%@ include file="../footer.jsp"%>
 
 </body>
-<div class="modal fade" id="noticeModal">
-	<div class="modal-dialog modal-xl">
-		<div class="modal-content">
 
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title" id="title">공지사항 상세내용</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal fade" id="noticeModal"  tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">공지사항 상세내용(<label for="" id="detail_noticeno"></label>)</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        	<div class="form-group" align="right">
+				<label for="">작성자 : </label>
+				<label for="" id="detail_id"></label>
 			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-				<table id="modal_table">
-					<tbody>
-						<tr>
-							<td>작성자 : </td>
-							<td id="detail_id"></td>
-							<td align="right" >작성일 : </td>
-							<td id="detail_regtime"></td>
-						</tr>
-						<tr>
-							<td>번호</td>
-							<td colspan="2" id="detail_noticeno"></td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td colspan="2" id="detail_subject" ></td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td colspan="2" id="detail_content"></td>
-						</tr>
-					</tbody>
-				</table>
+        	<div class="form-group" align="right">
+				<label align="right" for="">작성일 : </label>
+				<label for="" id="detail_regtime"></label>
 			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="javascript:showModifyModal();">수정</button>
-				<button type="button" class="btn btn-danger" onclick="javascript:deleteNotice()" >삭제</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        	<div class="form-group" align="left">
+			<label for="">제목</label>
+				<input type="text" class="form-control subject" id="detail_subject" readonly>
 			</div>
-
-		</div>
-	</div>
+        	<div class="form-group" align="left">
+			<label for="">내용</label>
+				<input type="text" class="form-control subject" id="detail_content" readonly>
+			</div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="javascript:showModifyModal();">수정</button>
+		<button type="button" class="btn btn-danger" onclick="javascript:deleteNotice()" >삭제</button>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="modal fade" id="modifyModal">
-	<div class="modal-dialog modal-xl">
-		<div class="modal-content">
 
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title" id="title">공지사항 수정</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal fade" id="modifyModal"  tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">공지사항 수정(<label for="" id="detail_noticeno"></label>)</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+      		<input type="hidden" name="modify_id" id="modify_id">
+			<input type="hidden" name="modify_regtime" id="modify_regtime">
+			<input type="hidden" name="modify_noticeno" id="modify_noticeno">
+        	<div class="form-group" align="left">
+			<label for="">제목</label>
+				<input type="text" class="form-control subject" id="modify_subject" name="modify_subject">
 			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-					<form id="writeform" method="post" action="">
-					<input type="hidden" name="modify_id" id="modify_id">
-					<input type="hidden" name="modify_regtime" id="modify_regtime">
-					<input type="hidden" name="modify_noticeno" id="modify_noticeno">
-					<div class="form-group" align="left">
-						<label for="subject">제목:</label>
-						<input type="text" class="form-control" id="modify_subject" name="modify_subject">
-					</div>
-					<div class="form-group" align="left">
-					<label for="content">내용:</label>
-					<textarea class="form-control" rows="15" id="modify_content" name="modify_content" style="resize:none;" ></textarea>
-					</div>
-					</form>
+        	<div class="form-group" align="left">
+			<label for="">내용</label>
+				<textarea rows="6" class="form-control subject" id="modify_content" name="modify_content" style="resize:none;"></textarea>
 			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="javascript:modifyNotice();">공지수정</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-
-		</div>
-	</div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="javascript:modifyNotice();">공지수정</button>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 </html>

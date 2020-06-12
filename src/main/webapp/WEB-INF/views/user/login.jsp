@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<c:if test="${cookie.ssafy_id.value ne null}">
-	<c:set var="saveid" value="${cookie.ssafy_id.value}"/>
-	<c:set var="idck" value=" checked=\"checked\""/>
-</c:if>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,11 +48,6 @@ function findpwd(){
 	<div class="line">
 		<h2 class="text-size-50 text-center">Login</h2>
 		<hr class="break-small background-primary break-center">
-	</div>
-	<div class="line">
-		<div class="margin">
-
-		</div>
 	</div>
 	<div class="col-lg-6" align="center">
 	<form action="login" class="customform" method="post" action="">
