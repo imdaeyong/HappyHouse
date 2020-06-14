@@ -36,7 +36,6 @@ public class DrugstoreController extends HttpServlet {
 	public List<DrugstoreInfo> searchDrugStore(@RequestParam Map<String, String> param ,Model m) throws Exception{
 		String x =param.get("x");
 		String y =param.get("y");
-		System.out.println(x+", " + y);
 		return drugstoreService.searchDrugStore(x, y);
 	}
 

@@ -115,11 +115,12 @@ function initMap(){
   	var clusterName = clusterer._markers;
   	console.log(clusterName);
   	
-	var iwContent = '<div class="card" style="width:200px">' +
+	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
 	'<img id="imgView" src = "/img/'+clusterName+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
-	'<h4 class="card-title">'+clusterName+'</h4>' +
+	'<div class="card-body background-primary">' +
+	'<h4 class="card-title" >'+clusterName+'SSAFY'+'</h4>' +
 	'<p class="card-text">'+clusterName+'</p>' +
-	'<a href="http://naver.com" class="btn btn-primary">가시는길</a>' +
+	'<a href="http://naver.com" class="button button-white-stroke text-size-12">가시는 길</a>' +
 	'</div>' +
 	'</div>';
 	 
@@ -180,14 +181,14 @@ function initMap(){
 	        	console.log(marker_infos);
 	        	
 	        	//인포윈도우 만들기 - 마커용
-	        	var iwContent = '<div class="card" style="width:200px">' +
+	        	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
 	    		'<img id="imgView" src = "/img/'+marker.getTitle()+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
-	    		'<div class="card-body">' +
-	    		'<h4 class="card-title">'+marker.getTitle()+'</h4>' +	    		
-	    		'<p class="card-text">현재 매물층 :'+data.floor+'</p>' +
+	    		'<div class="card-body background-primary">' +
+	    		'<h4 class="card-title" >'+marker.getTitle()+'</h4>' +	    		
+	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
-	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="btn btn-primary">매물보러가기</a>' +
-	    		'<a href="http://naver.com" class="btn btn-primary">가시는길</a>' +
+	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12">매물보러가기</a>' +
+	    		'<a href="http://naver.com" class="button button-white-stroke text-size-12" style="margin-top:10px;">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
