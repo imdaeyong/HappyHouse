@@ -39,7 +39,13 @@
 <script>
 
 $(document).ready(function() {
-	 initMap();
+	navigator.geolocation.getCurrentPosition(function(position) {
+		var lat = position.coords.latitude, // 위도
+		    lon = position.coords.longitude; // 경도    
+		    $("#lat").val(lat);
+			$("#lon").val(lon);
+			initMap();
+	});
 });
 function initMap(){
 	//마커 이미지!
@@ -80,36 +86,27 @@ function initMap(){
 	      infowindow.close();
 	      infowindow.open(map, marker);  
 	});
+	var startPoint;
 	
-	 navigator.geolocation.getCurrentPosition(function(position) {//현재위치 받아오기.
-		 var lat = position.coords.latitude, // 위도
-		 lon = position.coords.longitude; // 경도		
-		 var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-		 message = '<div class ="label"><span class="left"></span><span class="center">현재위치! </span><span class="right"></span></div>';
-
-		 // 마커와 인포윈도우를 표시합니다
-		 displayMarker(locPosition, message);  
-	});
+	var my_loc = new kakao.maps.LatLng($("#lat").val(),$("#lon").val());
 	
-	function displayMarker(locPosition, message) {
-	    // 마커를 생성합니다
-	    var my_marker = new kakao.maps.Marker({  
-	        map: map, 
-	        position: locPosition,
-	    }); 
+    // 마커를 생성합니다
+    var my_marker = new kakao.maps.Marker({  
+        map: map, 
+        position: my_loc,
+        image:markerImage
+    }); 
 
 	 // 커스텀 오버레이를 생성합니다
-	    var customOverlay = new kakao.maps.CustomOverlay({
-	        position: locPosition,
-	        content: message   
-	    });
+    var customOverlay = new kakao.maps.CustomOverlay({
+        position: my_loc,
+        content: '<div class ="label"><span class="left"></span><span class="center">현재위치! </span><span class="right"></span></div>'   
+    });
 
-	    // 커스텀 오버레이를 지도에 표시합니다
-	    customOverlay.setMap(map);
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
 	    
-		console.log(my_marker.getTitle());
-	}    
-	
+	console.log(startPoint);
 	
 	
 	 // 마커 클러스터러를 생성합니다 
@@ -176,7 +173,7 @@ function initMap(){
 	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
 	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank">매물보러가기</a>' +
-	    		'<a href="https://map.kakao.com/?sName=역삼동멀티캠퍼스&eName='+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
+	    		'<a href="https://map.kakao.com/?sName=역삼동멀티캠퍼스&eName='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
@@ -251,6 +248,8 @@ $(document).ready(function(){
 });//ready
 
 </script>
+<input type="hidden" id="lat"/>
+<input type="hidden" id="lon" />
 	시도 : <select id="sido"> <option value="0">선택</option></select>
 	구군 : <select id="gugun"> <option value="0">선택</option></select>
 	읍면동 : <select id="dong"><option value="0">선택</option></select>
