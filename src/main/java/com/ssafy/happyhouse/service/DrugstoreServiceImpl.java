@@ -15,9 +15,9 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 	DrugstoreMapper mapper;
 	
 	@Override
-	public List<DrugstoreInfo> searchDrugStore(String lat, String lon) throws Exception {
+	public List<DrugstoreInfo> searchDrugStore(String x, String y) throws Exception {
 		// TODO Auto-generated method stub
-		return mapper.searchDrugStore(lat, lon);
+		return mapper.searchDrugStore(x, y);
 	}
 
 }

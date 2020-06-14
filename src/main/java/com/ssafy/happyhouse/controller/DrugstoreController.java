@@ -34,10 +34,10 @@ public class DrugstoreController extends HttpServlet {
 	
 	@RequestMapping(value="/searchDrugStore")
 	public List<DrugstoreInfo> searchDrugStore(@RequestParam Map<String, String> param ,Model m) throws Exception{
-		String lat =param.get("lat");
-		String lon =param.get("lon");
-		System.out.println(lat + "; " + lon);
-		return drugstoreService.searchDrugStore(lat, lon);
+		String x =param.get("x");
+		String y =param.get("y");
+		System.out.println(x+", " + y);
+		return drugstoreService.searchDrugStore(x, y);
 	}
 
 	

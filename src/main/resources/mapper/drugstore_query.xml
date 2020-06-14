@@ -4,7 +4,8 @@
 	
 	
 	<select id ="searchDrugStore" resultType="DrugstoreInfo">
-		SELECT id, drugstore_name as drugstoreName, drugstore_address as drugstoreAddress, lng, lat, phone_num as phoneNum from drugstoreinfo limit 10;
+		SELECT id, drugstore_name as drugstoreName, drugstore_address as drugstoreAddress, X, Y, phone_num as phoneNum from drugstoreinfo
+			where X between #{x}-500 and  #{x}+500 and Y between #{y}-500 and  #{y}+500;
 	</select>
 
 </mapper>

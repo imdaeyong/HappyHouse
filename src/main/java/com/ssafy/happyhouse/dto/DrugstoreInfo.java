@@ -4,8 +4,8 @@ public class DrugstoreInfo {
 	private String id;
 	private String drugstoreName;
 	private String drugstoreAddress;
-	private String lng;
-	private String lat;
+	private String X;
+	private String Y;
 	private String phoneNum;
 	public String getId() {
 		return id;
@@ -25,17 +25,17 @@ public class DrugstoreInfo {
 	public void setDrugstoreAddress(String drugstoreAddress) {
 		this.drugstoreAddress = drugstoreAddress;
 	}
-	public String getLng() {
-		return lng;
+	public String getX() {
+		return X;
 	}
-	public void setLng(String lng) {
-		this.lng = lng;
+	public void setX(String x) {
+		X = x;
 	}
-	public String getLat() {
-		return lat;
+	public String getY() {
+		return Y;
 	}
-	public void setLat(String lat) {
-		this.lat = lat;
+	public void setY(String y) {
+		Y = y;
 	}
 	public String getPhoneNum() {
 		return phoneNum;
@@ -46,8 +46,9 @@ public class DrugstoreInfo {
 	@Override
 	public String toString() {
 		return "DrugstoreInfo [id=" + id + ", drugstoreName=" + drugstoreName + ", drugstoreAddress=" + drugstoreAddress
-				+ ", lng=" + lng + ", lat=" + lat + ", phoneNum=" + phoneNum + "]";
+				+ ", X=" + X + ", Y=" + Y + ", phoneNum=" + phoneNum + "]";
 	}
+
 	
 	
 }

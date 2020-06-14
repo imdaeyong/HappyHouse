@@ -6,7 +6,7 @@ import com.ssafy.happyhouse.dto.DrugstoreInfo;
 
 public interface DrugstoreService {
 
-	List<DrugstoreInfo> searchDrugStore(String lat, String lon) throws Exception;
+	List<DrugstoreInfo> searchDrugStore(String x, String y) throws Exception;
 
 
 }

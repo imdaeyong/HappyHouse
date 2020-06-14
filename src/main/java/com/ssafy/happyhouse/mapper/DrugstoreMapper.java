@@ -10,7 +10,7 @@ import com.ssafy.happyhouse.dto.DrugstoreInfo;
 @Mapper
 public interface DrugstoreMapper {
 
-	List<DrugstoreInfo> searchDrugStore(@Param("lat") String lat,@Param("lon") String lon) throws Exception;
+	List<DrugstoreInfo> searchDrugStore(@Param("x") String x,@Param("y") String y) throws Exception;
 
 
 }
