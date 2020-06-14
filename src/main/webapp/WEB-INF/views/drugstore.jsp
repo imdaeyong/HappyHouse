@@ -31,8 +31,8 @@
 	<div class="background-primary padding text-center">
         <p class="h1">내주변 약국 찾기</p>                                                                        
 	</div>
-	<section id="index_section">
-		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
+	<section id="index_section" style="margin-bottom:10px;">
+		<div class="card col-sm-12 mt-1">
 			<div class="card-body">
 
 <!-- here start -->

@@ -22,6 +22,7 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2017.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 
@@ -251,14 +252,14 @@ function makeDetailHtml(detail){
 	  	</form>
 	  	</div>	  	
 	  	<div style="width:100%; height:460px; overflow:auto">
-		    <table class="w3-table-all w3-hoverable w3-small" style="border:1px;">
+		    <table class="table" style="margin-bottom: 50px; font-size:16px;">
 			    <thead>
-			      <tr class="w3-lime">
-			        <th class="w3-lime" style="position:sticky; top:0;">번호</th>
-			        <th class="w3-lime" style="position:sticky; top:0;">법정동</th>
-			        <th class="w3-lime" style="position:sticky; top:0;">아파트이름</th>
-			        <th class="w3-lime" style="position:sticky; top:0;">거래금액</th>
-			        <th class="w3-lime" style="position:sticky; top:0;">거래종류</th>
+			      <tr style="text-align:center;">
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">번호</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">법정동</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">아파트이름</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">거래금액</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">거래종류</th>
 			      </tr>
 			    </thead>
 
