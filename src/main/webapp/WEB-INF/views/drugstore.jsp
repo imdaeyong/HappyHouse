@@ -29,7 +29,7 @@
 
 <div class="container">
 	<div class="mt-2 mb-2">
-		<h2>주소로 찾기</h4>
+		<h2>내주변 약국 찾기</h4>
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
@@ -129,9 +129,9 @@ function markMap(datas){
 	                map: map // 마커를 표시할 지도객체입니다
 	           })
 	         
-	           var iwContent = '<div style="padding:5px;"><h4 class="card-title">'+data.drugstoreName+
-	           '<p class="card-text">'+data.phoneNum+'</p>' +
-	           '<a href="https://map.kakao.com/link/to/'+data.drutstoreName+','+result[0].y+','+result[0].x+'" style="color:blue" target="_blank">길찾기</a></div>', 
+	           var iwContent = '<div class="card" style="width:200px; text-align: center;"><div class="card-body background-primary"><h4 class="card-title">'+data.drugstoreName+
+	           '</h4><p class="card-text">'+data.phoneNum+'</p>' +
+	           '<a href="https://map.kakao.com/link/to/'+data.drugstoreName+','+result[0].y+','+result[0].x+'" class="button button-white-stroke text-size-12" style="margin-top:10px;">길찾기</a></div></div>', 
 	           iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 	           // 인포윈도우를 생성합니다
 	           var infowindow = new kakao.maps.InfoWindow({
@@ -157,9 +157,6 @@ var locations= [];
 </script>
 <input type="hidden" id="lat"/>
 <input type="hidden" id="lon" />
-	시도 : <select id="sido"> <option value="0">선택</option></select>
-	구군 : <select id="gugun"> <option value="0">선택</option></select>
-	읍면동 : <select id="dong"><option value="0">선택</option></select>
 	<!-- map start -->
 <div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 <!-- map end -->
