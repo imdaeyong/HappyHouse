@@ -27,12 +27,12 @@
 
 <%@ include file="header.jsp" %>
 
-<div class="container">
-	<div class="mt-2 mb-2">
-		<h2>주소로 찾기</h4>
+<div class="container" style="margin-bottom:10px;">
+	<div class="background-primary padding text-center">
+        <p class="h1">지도로 아파트 검색</p>                                                                        
 	</div>
 	<section id="index_section">
-		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
+		<div class="card col-sm-12 mt-1">
 			<div class="card-body">
 
 <!-- here start -->
@@ -152,7 +152,7 @@ function initMap(){
 			$("tbody").empty(); //테이블 초기화
 	           
 	        $.each(datas, function(index, vo) {
-	           let str = "<tr class="+colorArr[index%3]+">"
+	           let str = "<tr>"
 	           + "<td>" + vo.no + "</td>"
 	           + "<td>" + vo.dong + "</td>"
 	           + "<td>" + vo.aptName + "</td>"
@@ -261,36 +261,47 @@ $(document).ready(function(){
 });//ready
 
 </script>
-	시도 : <select id="sido"> <option value="0">선택</option></select>
-	구군 : <select id="gugun"> <option value="0">선택</option></select>
-	읍면동 : <select id="dong"><option value="0">선택</option></select>
-	<input type="hidden" id="cur_lat"/>
-	<input type="hidden" id="cur_lon"/>
-	<!-- map start -->
-<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-<!-- map end -->
-<table class="table mt-2">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>법정동</th>
-			<th>아파트이름</th>
-			<th>층</th>
-			<th>거래가격</th>
-			<th>링크</th>
-		</tr>
-	</thead>
-	<tbody>
-	<!--  여기에 결과 들어감 -->
-	</tbody>
-</table>
+				<form class="customform">
+					<table class="table" style=" font-size:16px; width:100%; text-align:center;margin-bottom:0;">
+						<thead class="thead-dark">
+							<tr>
+								<th width="33%">시도</th>
+								<th width="33%">구군</th>
+								<th width="33%">읍면동</th>
+							</tr>
+							<tr>
+								<td style="padding: 0;"><select id="sido" style="margin-bottom:0;"> <option value="0">선택</option></td>
+								<td style="padding: 0;"><select id="gugun" style="margin-bottom:0;"	> <option value="0">선택</option></td>
+								<td style="padding: 0;"><select id="dong" style="margin-bottom:0;"> <option value="0">선택</option></td>
+							</tr>
+						</thead>
+					</table>
+				</form>
+				<input type="hidden" id="cur_lat"/>
+				<input type="hidden" id="cur_lon"/>
+				<!-- map start -->
+				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
+				<!-- map end -->
+				<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+					<thead class="thead-dark">
+						<tr>
+							<th>번호</th>
+							<th>법정동</th>
+							<th>아파트이름</th>
+							<th>층</th>
+							<th>거래가격</th>
+							<th>링크</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!--  여기에 결과 들어감 -->
+					</tbody>
+				</table>
 <!-- here end -->
-
-
-				</div>
 			</div>
-		</section>
-	</div>
+		</div>
+	</section>
+</div>
 
 <!-- Footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>

@@ -28,8 +28,8 @@
 	<%@ include file="header.jsp" %> 
 
 <div class="container">
-	<div class="mt-2 mb-2">
-		<h2>내주변 약국 찾기</h4>
+	<div class="background-primary padding text-center">
+        <p class="h1">내주변 약국 찾기</p>                                                                        
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
@@ -94,7 +94,7 @@ function searchDrugStore(x,y){
 			$("tbody").empty(); //테이블 초기화
 	           
 	        $.each(datas, function(index, vo) {
-	           let str = "<tr class="+colorArr[index%3]+">"
+	           let str = "<tr>"
 	           + "<td>" + vo.drugstoreName + "</td>"
 	           + "<td>" + vo.drugstoreAddress + "</td>"
 	           + "<td>" + vo.phoneNum + "</td></tr>"
@@ -160,8 +160,8 @@ var locations= [];
 	<!-- map start -->
 <div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 <!-- map end -->
-<table class="table mt-2">
-	<thead>
+<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+	<thead class="thead-dark" style="text-align:center;">
 		<tr>
 			<th>약국명</th>
 			<th>약국주소</th>
