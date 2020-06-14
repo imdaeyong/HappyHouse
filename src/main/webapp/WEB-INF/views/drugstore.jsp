@@ -57,7 +57,7 @@ function makeMap(){
 		
 	map = new kakao.maps.Map(document.getElementById('map'), {
 		center : location, // 지도의 중심좌표
-		level : 10	// 지도의 확대 레벨
+		level : 4	// 지도의 확대 레벨
 	});
 	
 	var marker = new kakao.maps.Marker({
@@ -128,6 +128,23 @@ function markMap(datas){
 	                position: new kakao.maps.LatLng(result[0].y, result[0].x), // 마커를 표시할 위치입니다
 	                map: map // 마커를 표시할 지도객체입니다
 	           })
+	         
+	           var iwContent = '<div style="padding:5px;"><h4 class="card-title">'+data.drugstoreName+
+	           '<p class="card-text">'+data.phoneNum+'</p>' +
+	           '<a href="https://map.kakao.com/link/to/'+data.drutstoreName+','+result[0].y+','+result[0].x+'" style="color:blue" target="_blank">길찾기</a></div>', 
+	           iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+	           // 인포윈도우를 생성합니다
+	           var infowindow = new kakao.maps.InfoWindow({
+	               position : iwPosition, 
+	               content : iwContent,
+	               removable: true
+	           });
+	           
+	           //마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	           kakao.maps.event.addListener(marker, 'click', function() {
+	        	      // 마커 위에 인포윈도우를 표시합니다
+	        	      infowindow.open(map, marker);  
+	        	});
 	        }
 	    }	
     });
