@@ -27,51 +27,31 @@
 
 <%@ include file="header.jsp" %>
 
-<div class="container" style="margin-bottom:10px;">
-	<div class="background-primary padding text-center">
-        <p class="h1">지도로 아파트 검색</p>                                                                        
+<div class="container">
+	<div class="mt-2 mb-2">
+		<h2>주소로 찾기</h2>
 	</div>
 	<section id="index_section">
-		<div class="card col-sm-12 mt-1">
-			<div class="card-body">
+		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
+			<div class="card-body">		
 
 <!-- here start -->
 <script>
 
 $(document).ready(function() {
-	navigator.geolocation.getCurrentPosition(function(position) {
-	      var lat = position.coords.latitude, // 위도
-	          lon = position.coords.longitude; // 경도    
-	          $("#lat").val(lat);
-	          $("#lon").val(lon);
-	          initMap();
-    });
+	 initMap();
 });
 function initMap(){
-	var map; //맵 생성, 센터 잡아주기
-	
-	 navigator.geolocation.getCurrentPosition(function(position) {//현재위치 받아오기.
-	        
-	        var lat = position.coords.latitude, // 위도
-	            lon = position.coords.longitude; // 경도
-	        
-	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-	        
-	        // 마커와 인포윈도우를 표시합니다
-	        displayMarker(locPosition, message);
-	            
-	      });
-	
 	//마커 이미지!
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-	var imageSize = new kakao.maps.Size(30, 35);
+	var imageSize = new kakao.maps.Size(24, 35);
+	var ssafySize = new kakao.maps.Size(50, 30);
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 	
-	var ssafyImg = "/img/ssafy.jpg";
-	var ssafy = new kakao.maps.MarkerImage(ssafyImg,imageSize);	
+	var ssafyLogo = "/img/ssafylogo.png";
+	var ssafy = new kakao.maps.MarkerImage(ssafyLogo,ssafySize);	
 	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
-	map = new kakao.maps.Map(document.getElementById('map'), {
+	var map = new kakao.maps.Map(document.getElementById('map'), {
 		center : multi, // 지도의 중심좌표
 		level : 10	// 지도의 확대 레벨
 	});
@@ -85,16 +65,14 @@ function initMap(){
 	var iwContent = '<div class="card" style="width:200px">' +
 	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
 	'<div class="card-body">' +
-	'<div><a href="http://edu.ssafy.com" class="btn btn-primary">에듀싸피</a>' +
-	'<a href="http://naver.com" class="btn btn-primary">가시는길</a></div>' +
-	'</div>' +
+	'<a href="http://edu.ssafy.com" class="btn btn-primary">에듀싸피</a>' +
+	'<a href="http://naver.com" class="btn btn-primary" tatget="_blank">가시는길</a></div>' +
 	'</div>';
 	 
 	
 	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
 	    content : iwContent,
-	    removable : true,
-	   
+	    removable : true   
 	}); 
 	
 	kakao.maps.event.addListener(marker, 'click', function() {
@@ -103,33 +81,44 @@ function initMap(){
 	      infowindow.open(map, marker);  
 	});
 	
+	 navigator.geolocation.getCurrentPosition(function(position) {//현재위치 받아오기.
+		 var lat = position.coords.latitude, // 위도
+		 lon = position.coords.longitude; // 경도		
+		 var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		 message = '<div class ="label"><span class="left"></span><span class="center">현재위치! </span><span class="right"></span></div>';
+
+		 // 마커와 인포윈도우를 표시합니다
+		 displayMarker(locPosition, message);  
+	});
+	
+	function displayMarker(locPosition, message) {
+	    // 마커를 생성합니다
+	    var my_marker = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition,
+	    }); 
+
+	 // 커스텀 오버레이를 생성합니다
+	    var customOverlay = new kakao.maps.CustomOverlay({
+	        position: locPosition,
+	        content: message   
+	    });
+
+	    // 커스텀 오버레이를 지도에 표시합니다
+	    customOverlay.setMap(map);
+	    
+		console.log(my_marker.getTitle());
+	}    
+	
+	
+	
 	 // 마커 클러스터러를 생성합니다 
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
         minLevel: 2, // 지도레벨이 어느정도 이상일때 클러스터 보일지
-        disableClickZoom: true
-    });
-	 
-  	//인포윈도우 만들기 - 클러스터용
-  	var clusterName = clusterer._markers;
-  	console.log(clusterName);
-  	
-	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
-	'<img id="imgView" src = "/img/'+clusterName+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
-	'<div class="card-body background-primary">' +
-	'<h4 class="card-title" >'+clusterName+'SSAFY'+'</h4>' +
-	'<p class="card-text">'+clusterName+'</p>' +
-	'<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12">가시는 길</a>' +
-	'</div>' +
-	'</div>';
-	 
-	
-	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
-	    content : iwContent,
-	    removable : true,
-	   
-	}); 
+        disableClickZoom: true //임의적으로 클러스터 클릭이벤트 만들기.(디폴트설정해제)
+    });	  
 	 
     kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     	var level = map.getLevel();
@@ -152,7 +141,7 @@ function initMap(){
 			$("tbody").empty(); //테이블 초기화
 	           
 	        $.each(datas, function(index, vo) {
-	           let str = "<tr>"
+	           let str = "<tr class="+colorArr[index%3]+">"
 	           + "<td>" + vo.no + "</td>"
 	           + "<td>" + vo.dong + "</td>"
 	           + "<td>" + vo.aptName + "</td>"
@@ -186,12 +175,13 @@ function initMap(){
 	    		'<h4 class="card-title" >'+marker.getTitle()+'</h4>' +	    		
 	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
-	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12">매물보러가기</a>' +
-	    		'<a href="https://map.kakao.com/link/to/'+marker.getTitle()+','+data.lat+','+data.lng+'" class="button button-white-stroke text-size-12" style="margin-top:10px;">가시는 길</a>' +
+	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank">매물보러가기</a>' +
+	    		'<a href="https://map.kakao.com/?sName=역삼동멀티캠퍼스&eName='+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
-	        	
+// 	    		'<a href="https://map.kakao.com/link/to/'+marker.getTitle()+','+data.lat+','+data.lng+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
+// 	    		 https://map.kakao.com/?sName=’+startPoint+’&eName=’+endPoint
 	        	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
 	        	    content : iwContent,
 	        	    removable : true,
@@ -261,49 +251,44 @@ $(document).ready(function(){
 });//ready
 
 </script>
-				<form class="customform">
-					<table class="table" style=" font-size:16px; width:100%; text-align:center;margin-bottom:0;">
-						<thead class="thead-dark">
-							<tr>
-								<th width="33%">시도</th>
-								<th width="33%">구군</th>
-								<th width="33%">읍면동</th>
-							</tr>
-							<tr>
-								<td style="padding: 0;"><select id="sido" style="margin-bottom:0;"> <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="gugun" style="margin-bottom:0;"	> <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="dong" style="margin-bottom:0;"> <option value="0">선택</option></td>
-							</tr>
-						</thead>
-					</table>
-				</form>
-				<input type="hidden" id="cur_lat"/>
-				<input type="hidden" id="cur_lon"/>
-				<!-- map start -->
-				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-				<!-- map end -->
-				<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
-					<thead class="thead-dark">
-						<tr>
-							<th>번호</th>
-							<th>법정동</th>
-							<th>아파트이름</th>
-							<th>층</th>
-							<th>거래가격</th>
-							<th>링크</th>
-						</tr>
-					</thead>
-					<tbody>
-					<!--  여기에 결과 들어감 -->
-					</tbody>
-				</table>
+	시도 : <select id="sido"> <option value="0">선택</option></select>
+	구군 : <select id="gugun"> <option value="0">선택</option></select>
+	읍면동 : <select id="dong"><option value="0">선택</option></select>
+	<input type="hidden" id="cur_lat"/>
+	<input type="hidden" id="cur_lon"/>
+	<!-- map start -->
+<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
+<!-- map end -->
+<table class="table mt-2">
+	<thead>
+		<tr>
+			<th>번호</th>
+			<th>법정동</th>
+			<th>아파트이름</th>
+			<th>층</th>
+			<th>거래가격</th>
+			<th>링크</th>
+		</tr>
+	</thead>
+	<tbody>
+	<!--  여기에 결과 들어감 -->
+	</tbody>
+</table>
 <!-- here end -->
+
+
+				</div>
 			</div>
-		</div>
-	</section>
-</div>
+		</section>
+	</div>
 
 <!-- Footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
+<style>
+.label { margin-bottom: 96px; width:60px;}
+.label * {display: inline-block;vertical-align: top;}
+.label .left {background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
+.label .center {background: url(https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
+</style>
 </body>
 </html>
