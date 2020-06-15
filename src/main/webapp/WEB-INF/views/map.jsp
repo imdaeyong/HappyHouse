@@ -114,18 +114,18 @@ function initMap(){
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-        minLevel: 3, // 지도레벨이 어느정도 이상일때 클러스터 보일지
+        minLevel: 2, // 지도레벨이 어느정도 이상일때 클러스터 보일지
         disableClickZoom: true //임의적으로 클러스터 클릭이벤트 만들기.(디폴트설정해제)
     });	  
 	 
     kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     	var level = map.getLevel();
         if(level<=2){
-        	map.setLevel(2);        	
+        	map.setLevel(1);        	
         }else{            
             // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-            map.setLevel(level-1, {anchor: cluster.getCenter()});
-        }   
+            map.setLevel(level-2, {anchor: cluster.getCenter()});
+        }    	
         
     });
 	 
