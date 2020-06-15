@@ -68,13 +68,14 @@ function initMap(){
 		image:ssafy
 	});
 	
-	var iwContent = '<div class="card" style="width:200px">' +
+ 
+	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
 	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
-	'<div class="card-body">' +
-	'<a href="http://edu.ssafy.com" class="btn btn-primary">에듀싸피</a>' +
-	'<a href="http://naver.com" class="btn btn-primary" tatget="_blank">가시는길</a></div>' +
-	'</div>';
-	 
+	   '<div class="card-body background-primary">' +
+	   '<h4 class="card-title" >SSAFY'+'</h4>' +
+	   '<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12">가시는 길</a>' +
+	   '</div>' +
+	   '</div>';
 	
 	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
 	    content : iwContent,
