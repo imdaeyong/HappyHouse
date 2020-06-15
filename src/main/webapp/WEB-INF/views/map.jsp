@@ -49,29 +49,17 @@ $(document).ready(function() {
 });
 function initMap(){
 	var map; //맵 생성, 센터 잡아주기
-	
-	 navigator.geolocation.getCurrentPosition(function(position) {//현재위치 받아오기.
-	        
-	        var lat = position.coords.latitude, // 위도
-	            lon = position.coords.longitude; // 경도
-	        
-	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-	        
-	        // 마커와 인포윈도우를 표시합니다
-	        displayMarker(locPosition, message);
-	            
-	      });
-	
+		
 	//마커 이미지!
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-	var imageSize = new kakao.maps.Size(30, 35);
+	var imageSize = new kakao.maps.Size(24, 35);
+	var ssafySize = new kakao.maps.Size(50, 30);
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 	
-	var ssafyImg = "/img/ssafy.jpg";
-	var ssafy = new kakao.maps.MarkerImage(ssafyImg,imageSize);	
+	var ssafyLogo = "/img/ssafylogo.png";
+	var ssafy = new kakao.maps.MarkerImage(ssafyLogo,ssafySize);	
 	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
-	map = new kakao.maps.Map(document.getElementById('map'), {
+	var map = new kakao.maps.Map(document.getElementById('map'), {
 		center : multi, // 지도의 중심좌표
 		level : 10	// 지도의 확대 레벨
 	});
@@ -82,13 +70,13 @@ function initMap(){
 		image:ssafy
 	});
 	
-	var iwContent = '<div class="card" style="width:200px">' +
-	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
-	'<div class="card-body">' +
-	'<div><a href="http://edu.ssafy.com" class="btn btn-primary">에듀싸피</a>' +
-	'<a href="http://naver.com" class="btn btn-primary">가시는길</a></div>' +
-	'</div>' +
-	'</div>';
+	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
+	'<img id="imgView" src = "/img/ssafylogo.png" class="card-img-top" width="200px" height="200px">' +
+	   '<div class="card-body background-primary">' +
+	   '<h4 class="card-title" >SSAFY'+'</h4>' +
+	   '<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12" target="_blank">가시는 길</a>' +
+	   '</div>' +
+	   '</div>';
 	 
 	
 	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
@@ -103,6 +91,24 @@ function initMap(){
 	      infowindow.open(map, marker);  
 	});
 	
+	var my_loc = new kakao.maps.LatLng($("#lat").val(),$("#lon").val());
+	
+	  // 마커를 생성합니다
+    var my_marker = new kakao.maps.Marker({  
+        map: map, 
+        position: my_loc,
+        image:markerImage
+    }); 
+
+	 // 커스텀 오버레이를 생성합니다
+    var customOverlay = new kakao.maps.CustomOverlay({
+        position: my_loc,
+        content: '<div class ="label"><span class="left"></span><span class="center">현재위치! </span><span class="right"></span></div>'   
+    });
+
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
+	
 	 // 마커 클러스터러를 생성합니다 
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
@@ -110,26 +116,7 @@ function initMap(){
         minLevel: 2, // 지도레벨이 어느정도 이상일때 클러스터 보일지
         disableClickZoom: true
     });
-	 
-  	//인포윈도우 만들기 - 클러스터용
-  	var clusterName = clusterer._markers;
-  	console.log(clusterName);
-  	
-	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
-	'<img id="imgView" src = "/img/'+clusterName+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
-	'<div class="card-body background-primary">' +
-	'<h4 class="card-title" >'+clusterName+'SSAFY'+'</h4>' +
-	'<p class="card-text">'+clusterName+'</p>' +
-	'<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12">가시는 길</a>' +
-	'</div>' +
-	'</div>';
-	 
 	
-	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
-	    content : iwContent,
-	    removable : true,
-	   
-	}); 
 	 
     kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     	var level = map.getLevel();
@@ -277,8 +264,8 @@ $(document).ready(function(){
 						</thead>
 					</table>
 				</form>
-				<input type="hidden" id="cur_lat"/>
-				<input type="hidden" id="cur_lon"/>
+				<input type="hidden" id="lat"/>
+	<input type="hidden" id="lon" />
 				<!-- map start -->
 				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				<!-- map end -->
