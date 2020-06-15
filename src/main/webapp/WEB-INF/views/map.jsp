@@ -56,10 +56,10 @@ function initMap(){
 	//마커 이미지!
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 	var imageSize = new kakao.maps.Size(24, 35);
-	var ssafySize = new kakao.maps.Size(50, 30);
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 	
 	var ssafyLogo = "/img/ssafylogo.png";
+	var ssafySize = new kakao.maps.Size(50, 30);
 	var ssafy = new kakao.maps.MarkerImage(ssafyLogo,ssafySize);	
 	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
 	var map = new kakao.maps.Map(document.getElementById('map'), {
@@ -81,6 +81,25 @@ function initMap(){
 	   '</div>' +
 	   '</div>';
 	 
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	searchDetailAddrFromCoords(new kakao.maps.LatLng($("#lat").val(), $("#lon").val()), function(result, status) {
+        console.log(result[0]);
+        if (status === kakao.maps.services.Status.OK) {
+           if(result[0].road_address==null)	{$("#doro").val(result[0].address.address_name);  }         
+           else {$("#doro").val(result[0].road_address.address_name);    }    
+           
+        }   
+    });
+	
+	
+	
+    function searchDetailAddrFromCoords(coords, callback) {
+        // 좌표로 법정동 상세 주소 정보를 요청합니다
+        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+	
 	
 	var ssafyinfowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
 	    content : ssafyiwContent,
@@ -177,7 +196,7 @@ function initMap(){
 	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
 	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank">매물보러가기</a>' +
-	    		'<a href="https://map.kakao.com/?sName=역삼동 멀티캠퍼스&eName='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
+	    		'<a href="https://map.kakao.com/?sName='+$("#doro").val()+'&eName='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
@@ -268,8 +287,9 @@ $(document).ready(function(){
 						</thead>
 					</table>
 				</form>
-				<input type="hidden" id="lat"/>
-	<input type="hidden" id="lon" />
+				<input type="text" id="lat"/>
+				<input type="text" id="lon" />
+				<input type="text" id="doro" />
 				<!-- map start -->
 				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				<!-- map end -->
