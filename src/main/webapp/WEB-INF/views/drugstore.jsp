@@ -74,18 +74,13 @@ function makeMap(){
     wtmLat = $("#lat").val(), // 변환할 WTM X 좌표 입니다
     wtmLon = $("#lon").val(); // 변환할 WTM Y 좌표 입니다
 
-    console.log(geocoder);
     searchDetailAddrFromCoords(new kakao.maps.LatLng(wtmLat, wtmLon), function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-            
-            var content = '<div class="bAddr">' +
-                            '<span class="title">법정동 주소정보</span>' + 
-                            detailAddr + 
-                        '</div>';
-            console.log(content);
-            console.log(map, marker);
+        console.log(result[0]);
+    	if (status === kakao.maps.services.Status.OK) {
+        	$("#doro").val(result[0].road_address.address_name);
+    		if(result[0].road_address.address_name == null){
+    			$("#doro").val(result[0].address.address_name);
+    		}
         }   
     });
     function searchDetailAddrFromCoords(coords, callback) {
@@ -104,7 +99,6 @@ function makeMap(){
 	
 	    // 정상적으로 검색이 완료됐으면 
 	    if (status === kakao.maps.services.Status.OK) {
-	        console.log(result[0]);
 	        searchDrugStore(result[0].x, result[0].y)
 	    }
 	}
@@ -154,7 +148,7 @@ function markMap(datas){
 	         
 	           var iwContent = '<div class="card" style="width:200px; text-align: center;"><div class="card-body background-primary"><h4 class="card-title">'+data.drugstoreName+
 	           '</h4><p class="card-text">'+data.phoneNum+'</p>' +
-	           '<a href="https://map.kakao.com/link/to/'+data.drugstoreName+','+result[0].y+','+result[0].x+'" class="button button-white-stroke text-size-12" style="margin-top:10px;">길찾기</a></div></div>', 
+	           '<a href="https://map.kakao.com/?sName='+$("#doro").val()+'&eName='+data.drugstoreAddress+'" class="button button-white-stroke text-size-12"  target="_blank" style="margin-top:10px;">길찾기</a></div></div>', 
 	           iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 	           // 인포윈도우를 생성합니다
 	           var infowindow = new kakao.maps.InfoWindow({
@@ -178,6 +172,7 @@ var markers= [];
 var locations= [];
 
 </script>
+<input type="hidden" id="doro"/>
 <input type="hidden" id="lat"/>
 <input type="hidden" id="lon" />
 	<!-- map start -->
