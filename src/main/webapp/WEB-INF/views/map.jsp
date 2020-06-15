@@ -29,7 +29,7 @@
   
 <div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
 	<div class="background-primary padding text-center">
-        <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                       
+        <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                              
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1">
@@ -71,7 +71,7 @@ function initMap(){
 	});
 	
 	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
-	'<img id="imgView" src = "/img/ssafylogo.png" class="card-img-top" width="200px" height="200px">' +
+	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
 	   '<div class="card-body background-primary">' +
 	   '<h4 class="card-title" >SSAFY'+'</h4>' +
 	   '<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12" target="_blank">가시는 길</a>' +
@@ -173,11 +173,12 @@ function initMap(){
 	    		'<h4 class="card-title" >'+marker.getTitle()+'</h4>' +	    		
 	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
-	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12">매물보러가기</a>' +
-	    		'<a href="https://map.kakao.com/link/to/'+marker.getTitle()+','+data.lat+','+data.lng+'" class="button button-white-stroke text-size-12" style="margin-top:10px;">가시는 길</a>' +
+	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank>매물보러가기</a>' +
+	    		'<a href="https://map.kakao.com/?sName=역삼동 멀티캠퍼스'+''+'&eName='+data.dong+ marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px; target="_blank">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
+	    		 https://map.kakao.com/?sName=’+startPoint+’&eName=’+endPoint
 	        	
 	        	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
 	        	    content : iwContent,
