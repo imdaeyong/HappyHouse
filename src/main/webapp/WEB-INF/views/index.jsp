@@ -191,9 +191,8 @@ function makeDetailHtml(detail){
 
 <!-- Page content -->
 <div class="w3-content w3-padding" style="max-width:1564px">
-
 	<div class="background-primary padding text-center">
-        <p class="h1">아파트 거래 내역 목록</p>                                                                        
+        <h2 class="text-size-50 text-center">아파트 거래 내역 목록</h2>                                                                       
 	</div>
   <!-- HouseDeal Section -->
   <div class="w3-container w3-padding-32 w3-row">

@@ -250,7 +250,7 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div class="container" align="center">
+	<div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
 		<div align="center">
 			<div class="line">
 				<h2 class="text-size-50 text-center">공지사항</h2>

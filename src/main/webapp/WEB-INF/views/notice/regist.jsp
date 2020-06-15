@@ -100,7 +100,7 @@
 
 <%@ include file="../header.jsp" %>
 	
-<div class="container" align="center" style="margin-bottom: 90px;">
+<div class="w3-display-container w3-content w3-wide" align="center" style="margin-bottom: 90px;">
 	<div class="col-lg-6" align="center">
 		<div class="line">
 			<h2 class="text-size-50 text-center">공지사항 작성</h2>

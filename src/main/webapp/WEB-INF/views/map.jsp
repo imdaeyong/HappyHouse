@@ -27,9 +27,9 @@
 
 <%@ include file="header.jsp" %>
   
-<div class="container" style="margin-bottom:10px;">
+<div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
 	<div class="background-primary padding text-center">
-        <p class="h1">지도로 아파트 검색</p>                                                                        
+        <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                       
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1">

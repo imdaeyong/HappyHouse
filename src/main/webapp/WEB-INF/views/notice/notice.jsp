@@ -30,7 +30,7 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	
-	<div class="container" align="center" style="margin-top: 90px;margin-bottom: 90px;">
+	<div class="w3-display-container w3-content w3-wide" align="center" style="margin-top: 90px;margin-bottom: 90px;">
 		
 		<div class="col-lg-8" align="center">
 			<h2>게시물</h2>

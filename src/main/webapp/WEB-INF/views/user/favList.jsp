@@ -26,9 +26,9 @@
 
 <%@ include file="../header.jsp" %>
 
-<div class="container">
+<div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
 	<div class="background-primary padding text-center">
-        <p class="h1">관심지역 상권 보기</p>                                                                        
+        <h2 class="text-size-50 text-center">관심지역 상권 보기</h2>                                                                       
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
