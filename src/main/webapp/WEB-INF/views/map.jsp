@@ -12,14 +12,17 @@
 <title>Happy House</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/components.css">
 <link rel="stylesheet" href="../css/icons.css">
 <link rel="stylesheet" href="../css/responsee.css">
 <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
 <link rel="stylesheet" href="../css/template-style.css">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2017.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cbe81440a2dc401533a67159970a3ac&libraries=services,clusterer,drawing"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ3iLRNnx8MpswGdoR69UQOtGSQltPDZQ"></script>
@@ -28,9 +31,9 @@
 <%@ include file="header.jsp" %>
   
 <div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
-	<div class="background-primary padding text-center">
-        <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                              
-	</div>
+	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
+        <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                       
+   </div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1">
 			<div class="card-body">
@@ -63,14 +66,14 @@ function initMap(){
 		center : multi, // 지도의 중심좌표
 		level : 10	// 지도의 확대 레벨
 	});
-	
-	var marker = new kakao.maps.Marker({
+	//싸피 마커
+	var ssafymarker = new kakao.maps.Marker({
 		position : multi,
 		map : map,
 		image:ssafy
 	});
 	
-	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
+	var ssafyiwContent = '<div class="card" style="width:200px; text-align: center;">' +
 	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
 	   '<div class="card-body background-primary">' +
 	   '<h4 class="card-title" >SSAFY'+'</h4>' +
@@ -79,21 +82,21 @@ function initMap(){
 	   '</div>';
 	 
 	
-	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
-	    content : iwContent,
+	var ssafyinfowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
+	    content : ssafyiwContent,
 	    removable : true,
 	   
 	}); 
 	
-	kakao.maps.event.addListener(marker, 'click', function() {
+	kakao.maps.event.addListener(ssafymarker, 'click', function() {
 	      // 마커 위에 인포윈도우를 표시합니다
-	      infowindow.close();
-	      infowindow.open(map, marker);  
+	      ssafyinfowindow.close();
+	      ssafyinfowindow.open(map, ssafymarker);  
 	});
 	
 	var my_loc = new kakao.maps.LatLng($("#lat").val(),$("#lon").val());
 	
-	  // 마커를 생성합니다
+	//현재위치 마커
     var my_marker = new kakao.maps.Marker({  
         map: map, 
         position: my_loc,
@@ -103,7 +106,7 @@ function initMap(){
 	 // 커스텀 오버레이를 생성합니다
     var customOverlay = new kakao.maps.CustomOverlay({
         position: my_loc,
-        content: '<div class ="label"><span class="left"></span><span class="center">현재위치! </span><span class="right"></span></div>'   
+        content: '<div class ="label"><span class="left"></span><span class="center">현재위치   </span><span class="right"></span></div>'   
     });
 
     // 커스텀 오버레이를 지도에 표시합니다
@@ -173,8 +176,8 @@ function initMap(){
 	    		'<h4 class="card-title" >'+marker.getTitle()+'</h4>' +	    		
 	    		'<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
 	    		'<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
-	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank>매물보러가기</a>' +
-	    		'<a href="https://map.kakao.com/?sName=역삼동 멀티캠퍼스'+''+'&eName='+data.dong+ marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px; target="_blank">가시는 길</a>' +
+	    		'<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank">매물보러가기</a>' +
+	    		'<a href="https://map.kakao.com/?sName=역삼동 멀티캠퍼스&eName='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
 	    		'</div>' +
 	    		'</div>';
 	    		 
@@ -294,4 +297,10 @@ $(document).ready(function(){
 <!-- Footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
+  <style>
+.label {margin-bottom: 96px;}
+.label * {display: inline-block;vertical-align: top;}
+.label .left {background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px; letter-spacing:0px;}
+.label .center {background: url(https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
+</style>
 </html>
