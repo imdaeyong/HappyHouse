@@ -27,8 +27,8 @@
 <%@ include file="../header.jsp" %>
 
 <div class="container">
-	<div class="mt-2 mb-2">
-		<h2>관심지역 상권정보 보기</h4>
+	<div class="background-primary padding text-center">
+        <p class="h1">관심지역 상권 보기</p>                                                                        
 	</div>
 	<section id="index_section">
 		<div class="card col-sm-12 mt-1" style="min-height: 850px;">
@@ -64,19 +64,7 @@ function initMap(){
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-        minLevel: 2, // 클러스터 할 최소 지도 레벨 
-        disableClickZoom: true //
-    });
-	 
-    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-    	var level = map.getLevel();
-        if(level<=2){
-        	map.setLevel(1);        	
-        }else{            
-            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-            map.setLevel(level-2, {anchor: cluster.getCenter()});
-        }    	
-        
+        minLevel: 5 // 클러스터 할 최소 지도 레벨 
     });
 	 
 	
@@ -86,46 +74,46 @@ function initMap(){
 				console.log(datas);
 				$("tbody").empty();
 				$.each(datas, function(index, vo) {
-					let str = "<tr class="+colorArr[index%3]+">"
+					let str = "<tr>"
 					+ "<td>" + vo.shopName + "</td>"
 					+ "<td>" + vo.codeName3 + "</td>"
-					+ "<td>" + vo.doro + "</td>"
-					+ "<td>" + vo.lat.replace(/\"/g,'') + "</td>"
-					+ "<td>" + vo.lng.replace(/\"/g,'') + "</td>/tr>"
+					+ "<td>" + vo.doro + "</td></tr>"
+					//+ "<td>" + vo.lat.replace(/\"/g,'') + "</td>"
+					//+ "<td>" + vo.lng.replace(/\"/g,'') + "</td></tr>"
 					$("tbody").append(str);
 					
 				});//each
 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-	        var markers = $(datas).map(function(i, data) {
-	            var marker= new kakao.maps.Marker({
-	                position : new kakao.maps.LatLng(data.lat.replace(/\"/g,''), data.lng.replace(/\"/g,'')),
-	     			label:data.shopName,
-	     			title:data.shopName,
-	     			image:markerImage,
-	     			clickable:true
-	            });
-	          //인포윈도우 만들기 - 마커용
-	        	var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
-	    		'<div class="card-body background-primary">' +
-	    		'<h4 class="card-title" >'+data.shopName+'</h4>' +	    		
-	    		'<p class="card-text" style="margin-bottom: 0.75rem;">주업종 :'+data.codeName3+'</p>' +
-	    		'<p class="card-text">주소 :'+data.doro+'</p>' +
-	    		'</div>' +
-	    		'</div>';
-	        	var infowindow = new kakao.maps.InfoWindow({ //인포윈도우 생성!
-	        	    content : iwContent,
-	        	    removable : true	        	   
-	        	});
-	        	
-	        	kakao.maps.event.addListener(marker, 'click', function() {
-	        	      // 마커 위에 인포윈도우를 표시합니다
-	        	      console.log(marker);
-	        	      infowindow.open(map, marker);  
-	        	});
-	            return marker;
-	        });
-			
+	       		var markers = $(datas).map(function(i, data) {
+		            var marker =  new kakao.maps.Marker({
+		                position : new kakao.maps.LatLng(data.lat.replace(/\"/g,''), data.lng.replace(/\"/g,'')),
+		     			label:data.shopName,
+		     			title:data.shopName,
+		     			image:markerImage,
+		     			clickable:true,
+				    });
+	
+		            var iwContent = '<div class="card" style="width:200px; text-align: center;">' +
+		             '<div class="card-body background-primary">' +
+		             '<h4 class="card-title" >'+data.shopName+'</h4>' +             
+		             '<p class="card-text" style="margin-bottom: 0.75rem;">주업종 :'+data.codeName3+'</p>' +
+		             '<p class="card-text">주소 :'+data.doro+'</p>' +
+		             '</div>' +
+		             '</div>';
+	 		       
+					var infowindow = new kakao.maps.InfoWindow({
+		               content : iwContent,
+		               removable: true
+		          	});
+	 		       
+		            kakao.maps.event.addListener(marker, 'click', function() {
+		        	      // 마커 위에 인포윈도우를 표시합니다
+		        	      console.log(marker);
+		        	      infowindow.open(map, marker);  
+		        	});		
+	            	return marker;
+	       	 });
 	        // 클러스터러에 마커들을 추가합니다
 	        clusterer.addMarkers(markers);
 	    });
@@ -188,26 +176,24 @@ function removeMarker(){
 }
 
 </script>
-	관심지역 : <select id="dong"><option value="0">선택</option></select>
-<table class="table mt-2">
-	<thead>
+	관심지역 : <form class="customform"><select  id="dong"><option value="0">선택</option></select></form>
+	<!-- map start -->
+	<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
+	<!-- map end -->
+<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+	<thead class="thead-dark">
 		<tr>
 			<th>상가명</th>
 			<th>분류</th>
 			<th>상가주소</th>
-			<th>lat</th>
-			<th>lnt</th>
 		</tr>
 	</thead>
-	<!-- map start -->
-<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-<!-- map end -->
-	
 	<tbody>
 	<!--  여기에 결과 들어감 -->
 	</tbody>
 </table>
 <!-- here end -->
+
 
 				</div>
 			</div>
