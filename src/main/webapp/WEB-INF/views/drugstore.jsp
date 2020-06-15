@@ -23,7 +23,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cbe81440a2dc401533a67159970a3ac&libraries=services,clusterer,drawing"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ3iLRNnx8MpswGdoR69UQOtGSQltPDZQ"></script>
 <body>
@@ -51,6 +50,8 @@ $(document).ready(function() {
 	});
  });
  
+
+
 function makeMap(){
 	var location = new kakao.maps.LatLng($("#lat").val(),$("#lon").val());
 		//마커 이미지!
@@ -73,6 +74,25 @@ function makeMap(){
     wtmLat = $("#lat").val(), // 변환할 WTM X 좌표 입니다
     wtmLon = $("#lon").val(); // 변환할 WTM Y 좌표 입니다
 
+    console.log(geocoder);
+    searchDetailAddrFromCoords(new kakao.maps.LatLng(wtmLat, wtmLon), function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            
+            var content = '<div class="bAddr">' +
+                            '<span class="title">법정동 주소정보</span>' + 
+                            detailAddr + 
+                        '</div>';
+            console.log(content);
+            console.log(map, marker);
+        }   
+    });
+    function searchDetailAddrFromCoords(coords, callback) {
+        // 좌표로 법정동 상세 주소 정보를 요청합니다
+        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+    
 	// WTM 좌표를 WGS84 좌표계의 좌표로 변환합니다
 	geocoder.transCoord(wtmLon, wtmLat, transCoordCB, {
 		input_coord: kakao.maps.services.Coords.WGS84, // 변환 결과로 받을 좌표계 입니다 
