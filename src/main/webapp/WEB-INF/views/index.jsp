@@ -24,7 +24,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2017.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 
 
 <script type="text/javascript">
