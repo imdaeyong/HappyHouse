@@ -77,8 +77,9 @@ function makeMap(){
     searchDetailAddrFromCoords(new kakao.maps.LatLng(wtmLat, wtmLon), function(result, status) {
         console.log(result[0]);
     	if (status === kakao.maps.services.Status.OK) {
+    		if(result[0].road_address != null){
         	$("#doro").val(result[0].road_address.address_name);
-    		if(result[0].road_address.address_name == null){
+    		}else{
     			$("#doro").val(result[0].address.address_name);
     		}
         }   
