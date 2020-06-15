@@ -12,22 +12,23 @@
 <title>Happy House</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/components.css">
 <link rel="stylesheet" href="../css/icons.css">
 <link rel="stylesheet" href="../css/responsee.css">
 <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
 <link rel="stylesheet" href="../css/template-style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cbe81440a2dc401533a67159970a3ac&libraries=services,clusterer,drawing"></script>
 <body>
 
 <%@ include file="../header.jsp" %>
 
 <div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
-	<div class="background-primary padding text-center">
+	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
         <h2 class="text-size-50 text-center">관심지역 상권 보기</h2>                                                                       
 	</div>
 	<section id="index_section">

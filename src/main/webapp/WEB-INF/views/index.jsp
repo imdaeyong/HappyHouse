@@ -26,22 +26,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 
-<style>
-  .w3-border-right {
-    width: 100px;
-  }
-  .w3-bar-item {
-    margin-right: 5px;
-  }
-  #nav {
-  margin : 0 auto;
-  }
-  #deal td {
-  	text-overflow:ellipsis;
-  	white-space: nowrap;
-  }
-
-</style>
 
 <script type="text/javascript">
 
@@ -190,8 +174,8 @@ function makeDetailHtml(detail){
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
 <!-- Page content -->
-<div class="w3-content w3-padding" style="max-width:1564px">
-	<div class="background-primary padding text-center">
+<div class="w3-display-container w3-content w3-wide" style="max-width:1500px">
+	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
         <h2 class="text-size-50 text-center">아파트 거래 내역 목록</h2>                                                                       
 	</div>
   <!-- HouseDeal Section -->

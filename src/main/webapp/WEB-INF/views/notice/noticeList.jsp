@@ -24,11 +24,13 @@
 <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
 <link rel="stylesheet" href="../css/template-style.css">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script type="text/javascript">
 
@@ -252,9 +254,8 @@
 
 	<div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
 		<div align="center">
-			<div class="line">
-				<h2 class="text-size-50 text-center">공지사항</h2>
-				<hr class="break-small background-primary break-center">
+			<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
+		        <h2 class="text-size-50 text-center">공지사항</h2>                                                                       
 			</div>
 			<form id="searchform" method="get" class="form-inline" action="">
 				<input type="hidden" name="act" id="act" value="search">

@@ -15,21 +15,13 @@
 <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="../owl-carousel/owl.theme.css">     
 <link rel="stylesheet" href="../css/template-style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 
-<style>
-.center {
-  margin: auto;
-  padding: 10px;
-  align: right;
-}
-</style>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -103,7 +95,7 @@ function registFav() {
 	<%@ include file="../header.jsp" %>
 
 
-	<div class="container" align="center" style="margin-bottom: 90px;">
+	<div class="w3-display-container w3-content w3-wide" style="max-width:1500px"  align="center">
 		<div class="line">
 			<h2 class="text-size-50 text-center">관심 지역 등록</h2>
 			<hr class="break-small background-primary break-center">
