@@ -22,7 +22,6 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2017.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cbe81440a2dc401533a67159970a3ac&libraries=services,clusterer,drawing"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ3iLRNnx8MpswGdoR69UQOtGSQltPDZQ"></script>
@@ -34,13 +33,15 @@
 	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
         <h2 class="text-size-50 text-center">지도로 아파트 검색</h2>                                                                       
    </div>
-	<section id="index_section">
-		<div class="card col-sm-12 mt-1">
-			<div class="card-body">
-
+	<section id="index_section" style="margin-top:50px;">
 <!-- here start -->
 <script>
-
+var map;
+//위치변경
+function setCenter(lat, lng) {            
+   // map.setCenter(moveLatLon);
+	map.setLevel(2, {anchor: new kakao.maps.LatLng(lat, lng)});
+}
 $(document).ready(function() {
 	navigator.geolocation.getCurrentPosition(function(position) {
 	      var lat = position.coords.latitude, // 위도
@@ -51,7 +52,7 @@ $(document).ready(function() {
     });
 });
 function initMap(){
-	var map; //맵 생성, 센터 잡아주기
+	 //맵 생성, 센터 잡아주기
 		
 	//마커 이미지!
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
@@ -62,7 +63,7 @@ function initMap(){
 	var ssafySize = new kakao.maps.Size(50, 30);
 	var ssafy = new kakao.maps.MarkerImage(ssafyLogo,ssafySize);	
 	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
-	var map = new kakao.maps.Map(document.getElementById('map'), {
+	map = new kakao.maps.Map(document.getElementById('map'), {
 		center : multi, // 지도의 중심좌표
 		level : 10	// 지도의 확대 레벨
 	});
@@ -151,7 +152,7 @@ function initMap(){
         }    	
         
     });
-	 
+
 	
 	 $.get("${pageContext.request.contextPath}/fsel/apt"
 			,{dong:$("#dong").val()}
@@ -162,13 +163,12 @@ function initMap(){
 			$("tbody").empty(); //테이블 초기화
 	           
 	        $.each(datas, function(index, vo) {
-	           let str = "<tr>"
+	           let str = "<tr onclick='setCenter("+vo.lat+","+ vo.lng +")'>"
 	           + "<td>" + vo.no + "</td>"
 	           + "<td>" + vo.dong + "</td>"
 	           + "<td>" + vo.aptName + "</td>"
 	           + "<td>" + vo.floor + "</td>"
-	           + "<td>" + vo.dealAmount + "</td>"
-	           + "<td><a>지도로 바로가기</a></td></tr>"
+	           + "<td>" + vo.dealAmount + "</td></tr>"
 	           $("tbody").append(str);
 	           
 	        });
@@ -225,7 +225,6 @@ function initMap(){
 	    });
 }
 	
-let colorArr = ['table-primary','table-success','table-danger'];
 var markers= [];
 var locations= [];
 
@@ -245,7 +244,7 @@ $(document).ready(function(){
 				,{sido:$("#sido").val()}
 				,function(data, status){
 					$("#gugun").empty();
-					$("#gugun").append('<option value="0">선택</option>');
+					$("#gugun").append('<option value="0">구 / 군</option>');
 					$.each(data, function(index, vo) {
 						$("#gugun").append("<option value='"+vo.gugun_code+"'>"+vo.gugun_name+"</option>");
 					});//each
@@ -258,7 +257,7 @@ $(document).ready(function(){
 				,{gugun:$("#gugun").val()}
 				,function(data, status){
 					$("#dong").empty();
-					$("#dong").append('<option value="0">선택</option>');
+					$("#dong").append('<option value="0">읍 / 동 / 면</option>');
 					$.each(data, function(index, vo) {
 						$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
 					});//each
@@ -272,21 +271,10 @@ $(document).ready(function(){
 });//ready
 
 </script>
-				<form class="customform">
-					<table class="table" style=" font-size:16px; width:100%; text-align:center;margin-bottom:0;">
-						<thead class="thead-dark">
-							<tr>
-								<th width="33%">시도</th>
-								<th width="33%">구군</th>
-								<th width="33%">읍면동</th>
-							</tr>
-							<tr>
-								<td style="padding: 0;"><select id="sido" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;" > <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="gugun" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;"> <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="dong" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;"> <option value="0">선택</option></td>
-							</tr>
-						</thead>
-					</table>
+				<form class="customform" style="margin-bottom:30px; text-align-last:center;">
+					<select id="sido"  style="margin-bottom:0; font-size:15px; width:32%;"><option value="0">시 / 도</option></select>
+					<select id="gugun" style="margin-bottom:0; font-size:15px; width:32%;"><option value="0">구 / 군</option></select>
+					<select id="dong" style="margin-bottom:0; font-size:15px; width:32%;"> <option value="0">읍 / 면 / 동</option></select>
 				</form>
 				<input type="hidden" id="lat"/>
 				<input type="hidden" id="lon" />
@@ -294,7 +282,7 @@ $(document).ready(function(){
 				<!-- map start -->
 				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				<!-- map end -->
-				<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+				<table class="table" style="margin-bottom: 50px;margin-top:30px; font-size:16px; width:100%; text-align:center;">
 					<thead class="thead-dark">
 						<tr>
 							<th>번호</th>
@@ -302,7 +290,6 @@ $(document).ready(function(){
 							<th>아파트이름</th>
 							<th>층</th>
 							<th>거래가격</th>
-							<th>링크</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -310,8 +297,6 @@ $(document).ready(function(){
 					</tbody>
 				</table>
 <!-- here end -->
-			</div>
-		</div>
 	</section>
 </div>
 
