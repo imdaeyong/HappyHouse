@@ -180,15 +180,15 @@ function makeDetailHtml(detail){
   <!-- HouseDeal Section -->
   <div class="w3-container w3-padding-32 w3-row">
   	<div class="w3-col" style="width:350px; margin-right:10px;">
-  		<img class="w3-image" id="houseimg" name="houseimage" src="/img/그림1.jpg" style="width: 300px; height: 190px">
-  		<table class="w3-table" style="margin-top: 20px; border-collapse: separate; border-spacing: 5px;">
+  		<img class="w3-image" id="houseimg" name="houseimage" src="/img/그림1.jpg" style="width: 350px; height: 190px">
+  		<table>
 			<tr>
-			  <th class="w3-border-right">주택명</th>
+			  <th class="w3-border-right" style="width:89px; height:67px;">주택명</th>
 			  <td id="housename"></td>
 			</tr>
 			<tr>
 			  <th class="w3-border-right">거래금액</th>
-			  <td id="housedealprice"></td>
+ 			  <td id="housedealprice"></td>
 			</tr>
 			<tr>
 			  <th class="w3-border-right">건축연도</th>
@@ -207,7 +207,7 @@ function makeDetailHtml(detail){
 			  <td id="housedong"></td>
 			</tr>
 			<tr>
-			  <th class="w3-border-right">지번</th>
+ 			  <th class="w3-border-right">지번</th>
 			  <td id="housejibun"></td>
 			</tr>
 		</table>
