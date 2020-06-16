@@ -100,7 +100,7 @@ public class HouseController extends HttpServlet {
 				jsonObj.put("searchtext", searchtext); //검색어
 				jsonObj.put("pg", pg);
 				jsonObj.put("deals",deals);			
-			} else {	
+			} else {	 
 				m.addAttribute("msg", "데이터가 없습니다.");
 			}
 			

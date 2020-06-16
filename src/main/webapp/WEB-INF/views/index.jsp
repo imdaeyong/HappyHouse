@@ -278,7 +278,7 @@ function makeDetailHtml(detail){
 </div>
 
 <!-- Footer -->
-
+ 
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 
 </body>
