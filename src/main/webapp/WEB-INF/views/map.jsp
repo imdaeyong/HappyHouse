@@ -76,11 +76,12 @@ function initMap(){
 	var ssafyiwContent = '<div class="card" style="width:200px; text-align: center;">' +
 	'<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
 	   '<div class="card-body background-primary">' +
-	   '<h4 class="card-title" >SSAFY'+'</h4>' +
-	   '<a href="https://map.kakao.com/link/to/SSAFY,37.5012743, 127.039585" class="button button-white-stroke text-size-12" target="_blank">가시는 길</a>' +
+	   '<h4 class="card-title" >SSAFY</h4>' +
+	   '<a href="https://map.kakao.com/?sName='+$("#doro").val()+'&eName=역삼동 멀티캠퍼스" class="button button-white-stroke text-size-12" style="margin-top:10px;" target="_blank">가시는 길</a>' +
 	   '</div>' +
 	   '</div>';
 	 
+	   
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
 	
@@ -167,7 +168,7 @@ function initMap(){
 	           + "<td>" + vo.aptName + "</td>"
 	           + "<td>" + vo.floor + "</td>"
 	           + "<td>" + vo.dealAmount + "</td>"
-	           + "<td>" + vo.lng + "</td></tr>"
+	           + "<td><a>지도로 바로가기</a></td></tr>"
 	           $("tbody").append(str);
 	           
 	        });
@@ -280,16 +281,16 @@ $(document).ready(function(){
 								<th width="33%">읍면동</th>
 							</tr>
 							<tr>
-								<td style="padding: 0;"><select id="sido" style="margin-bottom:0;"> <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="gugun" style="margin-bottom:0;"	> <option value="0">선택</option></td>
-								<td style="padding: 0;"><select id="dong" style="margin-bottom:0;"> <option value="0">선택</option></td>
+								<td style="padding: 0;"><select id="sido" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;" > <option value="0">선택</option></td>
+								<td style="padding: 0;"><select id="gugun" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;"> <option value="0">선택</option></td>
+								<td style="padding: 0;"><select id="dong" style="margin-bottom:0; vertical-align:top;text-align-last:center; font-size:15px;"> <option value="0">선택</option></td>
 							</tr>
 						</thead>
 					</table>
 				</form>
-				<input type="text" id="lat"/>
-				<input type="text" id="lon" />
-				<input type="text" id="doro" />
+				<input type="hidden" id="lat"/>
+				<input type="hidden" id="lon" />
+				<input type="hidden" id="doro" />
 				<!-- map start -->
 				<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				<!-- map end -->
