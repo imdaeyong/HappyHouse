@@ -40,6 +40,12 @@ function search(){
 	 var searchtext =  document.getElementById("searchtext").value;
 	 var pg =  document.getElementById("pg").value;
 	
+	 $("saved_aptdeal").val(aptdeal);
+	 $("saved_aptrent").val(aptrent);
+	 $("saved_housedeal").val(housedeal);
+	 $("saved_houserent").val(houserent);
+	 $("saved_searchsel").val(searchsel);
+	 $("saved_searchtext").val(searchtext);
 	 var datas = {"aptdeal" : aptdeal,
 			 	  "aptrent" : aptrent,
 			 	  "housedeal" : housedeal,
@@ -88,13 +94,13 @@ function makeListHtml(list){
 
 	$("#tbodyHouse").html("");
 
-	for( var i=0; i<list.length; i++){
+	for( var i=0; i<list.deals.length; i++){
 		
-		var no = list[i].no;
-		var dong = list[i].dong;
-		var aptName = list[i].aptName;
-		var dealAmount = list[i].dealAmount;
-		var type = list[i].type;
+		var no = list.deals[i].no;
+		var dong = list.deals[i].dong;
+		var aptName = list.deals[i].aptName;
+		var dealAmount = list.deals[i].dealAmount;
+		var type = list.deals[i].type;
 		
 		var listHtml =
 			'<tr id="deal'+ no +'"style="cursor:pointer" data-id=' + no +'><td>' 
@@ -104,6 +110,7 @@ function makeListHtml(list){
 
 		$("#tbodyHouse").append(listHtml);		
 	}
+	$("#nav").html(list.navigation.navigator);
 	makeListHtmlEventHandler();
 }
 function makeListHtmlEventHandler(){
@@ -161,11 +168,14 @@ function makeDetailHtml(detail){
 </script>
 <script>
  	  function pageMove(pg) { 
-			document.getElementById("pg").value=pg;
-			document.getElementById("searchsel").value="${searchsel}";
-			document.getElementById("searchtext").value="${searchtext}";
-			document.getElementById("houseForm").action = "${root}/house.do?";
-			document.getElementById("houseForm").submit();
+			$("#pg").val(pg);
+			$("aptdeal").val($("#saved_aptdeal").val());
+			$("aptrent").val($("#saved_aptrent").val());
+			$("housedeal").val($("#saved_housedeal").val());
+			$("houserent").val($("#saved_houserent").val());
+			$("searchsel").val($("#saved_searchsel").val());
+			$("searchtext").val($("#saved_searchtext").val());
+			search();
 		}
  	</script>
 <body>
@@ -222,6 +232,14 @@ function makeDetailHtml(detail){
 		  	  <input type="checkbox" id="houserent" name="houserent" value="houserent" checked><label for="houserent" style="cursor: pointer;"> 다세대, 주택 전월세 </label>
 	  		</div>
 	  		
+	  		<!-- 페이지눌렀을때 사용할저장용 데이터  -->
+	  		<input type="hidden" id="saved_aptdeal"/>
+	  		<input type="hidden" id="saved_aptrent"/>
+	  		<input type="hidden" id="saved_housedeal"/>
+	  		<input type="hidden" id="saved_houserent"/>
+	  		<input type="hidden" id="saved_searchsel"/>
+	  		<input type="hidden" id="saved_searchtext"/>
+	  		
 	  		<select id="searchsel" name="searchsel" style="cursor: pointer;">
 			  <option value="all">--- 전체 ---</option>
 			  <option value="dong">법정동</option>
@@ -233,15 +251,15 @@ function makeDetailHtml(detail){
 	  	
 	  	</form>
 	  	</div>	  	
-	  	<div style="width:100%; height:460px; overflow:auto">
-		    <table class="table" style="margin-bottom: 50px; font-size:16px;">
+	  	<div style="width:100%; height:460px; overflow:auto;margin-bottom: 50px;">
+		    <table class="table" style=" font-size:16px;">
 			    <thead>
 			      <tr style="text-align:center;">
-			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">번호</th>
-			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">법정동</th>
-			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">아파트이름</th>
-			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">거래금액</th>
-			        <th class="w3-2017-navy-peony" style="position:sticky; top:0;">거래종류</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0; width:9%;">번호</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0; width:15%;">법정동</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0; width:44%;">아파트이름</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0; width:14%;">거래금액</th>
+			        <th class="w3-2017-navy-peony" style="position:sticky; top:0; width:18%;">거래종류</th>
 			      </tr>
 			    </thead>
 
@@ -249,13 +267,9 @@ function makeDetailHtml(detail){
 			  	</tbody>
 		  	</table>
 	  	</div>
-	  	<table id = "nav">
-			 <tr>
-			  	<td>
-			  	${navigation.navigator }
-			  </td>
-			  </tr>
-		</table>
+	  	<div id = "nav">
+
+		</div>
   	</div>
   	
   </div>

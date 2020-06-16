@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,8 +38,8 @@ public class HouseController extends HttpServlet {
 	}
 	
 	@RequestMapping(value="/list")
-	public List<HouseDeal> housesearch(@RequestParam Map<String, String> param ,Model m) throws Exception{
-		
+	public JSONObject housesearch(@RequestParam Map<String, String> param ,Model m) throws Exception{
+		JSONObject jsonObj = new JSONObject();
 		String aptdeal = param.get("aptdeal");
 		String aptrent =  param.get("aptrent");
 		String housedeal = param.get("housedeal");
@@ -87,14 +88,19 @@ public class HouseController extends HttpServlet {
 			}
 			deals = houseService.searchAll(currentPage, sizePerPage, bean);
 			PageNavigation pageNavigation = houseService.makePageNavigation(currentPage, sizePerPage,bean);
-
+			
 			if (deals != null) {
-				m.addAttribute("navigation", pageNavigation);
-				m.addAttribute("searchsel", searchsel); //검색조건
-				m.addAttribute("searchtext", searchtext); //검색어
-				m.addAttribute("pg", pg);
-				m.addAttribute("deals",deals);			
-			} else {
+//				m.addAttribute("navigation", pageNavigation);
+//				m.addAttribute("searchsel", searchsel); //검색조건
+//				m.addAttribute("searchtext", searchtext); //검색어
+//				m.addAttribute("pg", pg);
+//				m.addAttribute("deals",deals);			
+				jsonObj.put("navigation", pageNavigation);
+				jsonObj.put("searchsel", searchsel); //검색조건
+				jsonObj.put("searchtext", searchtext); //검색어
+				jsonObj.put("pg", pg);
+				jsonObj.put("deals",deals);			
+			} else {	
 				m.addAttribute("msg", "데이터가 없습니다.");
 			}
 			
@@ -102,7 +108,9 @@ public class HouseController extends HttpServlet {
 			e.printStackTrace();
 			m.addAttribute("msg", "검색 중 문제가 발생했습니다.");
 		}
-		return deals;
+		System.out.println(m);
+		System.out.println(jsonObj);
+		return jsonObj;
 	}
 	@GetMapping(value="/detail/{no}") //상세정보 
 	public HouseDeal detail(@PathVariable int no) {

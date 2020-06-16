@@ -5,7 +5,7 @@
 	<select id ="searchDong" resultType="CommInfo">
 		select * from comminfo where 1=1
 		<if test='dong !="" and dong !=null'>
-			and dong like concat('%',#{dong},'%')
+			and dong like concat('%',#{dong},'%') limit 10
 		</if>		
 	</select>
 	

@@ -22,7 +22,7 @@ public class HousePageBean implements Serializable {
 	/**조회할 페이지 번호*/
 	private int 	pageNo;
 	/**한 페이지에 표시할 데이타 수*/
-	private int 	interval = 5;
+	private int 	interval = 10;
 	/**한 페이지에 표시할 시작 번호*/
 	private int 	start=1;
 	/**한 페이지에 표시할 끝 번호 */
