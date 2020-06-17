@@ -72,7 +72,8 @@ function initMap(){
     kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     	var level = map.getLevel();
         if(level<=2){
-        	map.setLevel(1);        	
+        	map.setLevel(1);    
+        	map.setCenter(cluster.getCenter());
         }else{            
             // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
             map.setLevel(level-2, {anchor: cluster.getCenter()});
