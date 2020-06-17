@@ -30,7 +30,7 @@
 	<%@ include file="header.jsp" %> 
 
 <div class="w3-display-container w3-content w3-wide" style="margin-bottom:10px;max-width:1500px;">
-	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg);">
+	<div class="background-primary padding text-center" style="background-image: URL(../img/bar_img2.jpg); margin-bottom:50px;">
         <h2 class="text-size-50 text-center">내주변 약국 찾기</h2>                                                                       
 	</div>
 	<section id="index_section" style="margin-bottom:10px;">
@@ -179,7 +179,7 @@ var locations= [];
 	<!-- map start -->
 <div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 <!-- map end -->
-<table class="table" style="margin-bottom: 50px; font-size:16px; width:100%">
+<table class="table" style="margin-bottom: 50px; margin-top: 50px; font-size:16px; width:100%">
 	<thead class="thead-dark" style="text-align:center;">
 		<tr>
 			<th>약국명</th>
@@ -202,4 +202,94 @@ var locations= [];
 <!-- Footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
+<style>
+  /*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-table100 {
+  width: 100%;
+  min-height: 100vh;
+  background: #c850c0;
+  background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+  background: linear-gradient(45deg, #4158d0, #c850c0);
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.wrap-table100 {
+  width: 1170px;
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table * {
+  position: relative;
+}
+table td, table th {
+  padding-left: 8px;
+}
+table thead tr {
+  height: 50px;
+  background: #36304a;
+}
+table tbody tr {
+  height: 50px;
+}
+table tbody tr:last-child {
+  border: 0;
+}
+
+table th, table td {
+  text-align: center;
+}
+
+.table100-head th{
+  font-family: OpenSans-Regular;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tbody tr {
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #808080;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:hover {
+  color: #555555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+</style>
 </html>
