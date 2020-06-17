@@ -168,6 +168,7 @@ function initMap(){
         }else{            
             // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
             map.setLevel(level-2, {anchor: cluster.getCenter()});
+            map.setCenter(cluster.getCenter());
         }       
         
     });

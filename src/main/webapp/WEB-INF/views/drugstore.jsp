@@ -70,6 +70,16 @@ function makeMap(){
 		image:markerImage
 	});
 	
+	// 커스텀 오버레이를 생성합니다
+    var customOverlay = new kakao.maps.CustomOverlay({
+        position: location,
+        content: '<div class ="label"><span class="center" style="border:1px solid black; background-color:white; margin-bottom: 90px;letter-spacing: 1px; font-family: NanumGothic,\'Malgun Gothic\',dotum,\'돋움\',sans-serif; color: #333; le">내위치   </span></div>'   
+    });
+
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
+    
+    
 	var geocoder = new kakao.maps.services.Geocoder(), // 좌표계 변환 객체를 생성합니다
     wtmLat = $("#lat").val(), // 변환할 WTM X 좌표 입니다
     wtmLon = $("#lon").val(); // 변환할 WTM Y 좌표 입니다
