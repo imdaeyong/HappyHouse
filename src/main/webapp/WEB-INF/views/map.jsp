@@ -43,7 +43,8 @@ let loc_lon;
 //위치변경
 function setCenter(lat, lng) {            
    // map.setCenter(moveLatLon);
-   map.setLevel(2, {anchor: new kakao.maps.LatLng(lat, lng)});
+   map.setLevel(1, {anchor: new kakao.maps.LatLng(lat, lng)});
+   map.setCenter(map.getCenter());
 }
 $(document).ready(function() {
    
@@ -107,9 +108,6 @@ function initMap(){
       image:ssafy
    });      
 
-   console.log(loc_lat);
-    console.log(loc_lon);
-    console.log(cur_loc);
       
     var ssafyiwContent = '<div class="card" style="width:200px; text-align: center;">' +
    '<img id="imgView" src = "/img/ssafy.jpg" class="card-img-top" width="200px" height="200px">' +
@@ -178,8 +176,6 @@ function initMap(){
     $.get("${pageContext.request.contextPath}/fsel/apt"
          ,{dong:$("#dong").val()}
          ,function(datas, status){
-         console.log("아파트리스트확인");
-         console.log(datas);
          
          $("tbody").empty(); //테이블 초기화
               
@@ -209,12 +205,11 @@ function initMap(){
                  {floor:data.floor},           
                  {marker:marker}                 
               ];
-              console.log(marker_infos);
               //인포윈도우 만들기 - 마커용
               var iwContent = '<div class="card" style="width:250px; text-align: center;">' +
              '<img id="imgView" src = "/img/'+marker.getTitle()+'.jpg" onerror="src=\'/img/그림1.jpg\'" class="card-img-top" width="200px" height="200px">' +
              '<div class="card-body background-primary">' +
-             '<h4 class="card-title" >'+marker.getTitle()+'</h4>' +             
+             '<h4 class="card-title" style="letter-spacing:1px;" >'+marker.getTitle()+'</h4>' +             
              '<p class="card-text" style="margin-bottom: 0.75rem;">현재 매물층 :'+data.floor+'</p>' +
              '<p class="card-text">거래가격 :'+data.dealAmount+'</p>' +
              '<a href="https://new.land.naver.com/search?sk='+data.dong+marker.getTitle()+'" class="button button-white-stroke text-size-12" target="_blank">매물보러가기</a>' +
@@ -231,18 +226,15 @@ function initMap(){
              
               kakao.maps.event.addListener(marker, 'click', function() {
                     // 마커 위에 인포윈도우를 표시합니다
-                    console.log(marker);
                     infowindow.open(map, marker);  
               });
               
               
-//               console.log(marker.mc);
               return marker;              
            });
 
            // 클러스터러에 마커들을 추가합니다
            clusterer.addMarkers(markers);
-           console.log(clusterer);
        });
     
     //거리재기

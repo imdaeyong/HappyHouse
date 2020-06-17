@@ -52,7 +52,7 @@ function initMap(){
 	var multi = new kakao.maps.LatLng(37.5012743, 127.039585);
 	map = new kakao.maps.Map(document.getElementById('map'), {
 		center : multi, // 지도의 중심좌표
-		level : 8	// 지도의 확대 레벨
+		level : 9	// 지도의 확대 레벨
 	});
 	
 	var marker = new kakao.maps.Marker({
